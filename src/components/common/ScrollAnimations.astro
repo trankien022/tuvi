@@ -1,0 +1,48 @@
+---
+/**
+ * ScrollAnimations Component
+ * Initializes scroll-triggered animations globally using Intersection Observer
+ * Should be included once in the main layout
+ */
+---
+
+<script>
+  import { initScrollAnimations } from '~/lib/utils/scroll-animations';
+
+  // Initialize scroll animations when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollAnimations({
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+        once: true,
+      });
+    });
+  } else {
+    // DOM is already loaded
+    initScrollAnimations({
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
+      once: true,
+    });
+  }
+
+  // Reinitialize on page navigation (for SPA-like behavior)
+  document.addEventListener('astro:page-load', () => {
+    initScrollAnimations({
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
+      once: true,
+    });
+  });
+
+  // Reinitialize after view transitions
+  document.addEventListener('astro:after-swap', () => {
+    initScrollAnimations({
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
+      once: true,
+    });
+  });
+</script>
+

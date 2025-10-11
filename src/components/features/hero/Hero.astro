@@ -1,0 +1,329 @@
+---
+import { Icon } from 'astro-icon/components';
+import { ScrollReveal } from '@common';
+---
+
+<!-- Preconnect to CDN for faster loading -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Animated gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3e%3cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3e%3cg%20fill=%22%23ffffff%22%20fill-opacity=%220.05%22%3e%3cpath%20d=%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3e%3c/g%3e%3c/g%3e%3c/svg%3e')]"></div>
+  </div>
+
+  <!-- UnicornStudio Animation with Loading State -->
+  <div id="us-animation-wrapper" class="absolute inset-0 overflow-hidden pointer-events-none opacity-0 transition-opacity duration-1000">
+    <div data-us-project="0EKzPMvVLLdF0UgtXigd" style="width: 100%; height: 100%; min-height: 100vh;"></div>
+  </div>
+
+  <!-- Floating elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute top-40 right-10 w-72 h-72 bg-pink-500/30 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-indigo-500/30 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
+    <div class="text-center">
+      <!-- Badge -->
+      <ScrollReveal animation="fade-down">
+        <div class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20 mb-6 sm:mb-8" style="font-family: 'Inter', sans-serif;">
+          <Icon name="tabler:sparkles" class="w-3 sm:w-4 h-3 sm:h-4 mr-1.5 sm:mr-2 text-yellow-300" />
+          <span class="text-xs sm:text-sm font-semibold tracking-wide">Luận Giải Tử Vi Chuyên Nghiệp</span>
+        </div>
+      </ScrollReveal>
+
+      <!-- Main heading -->
+      <ScrollReveal animation="fade-up" delay={100}>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-4 sm:mb-6 leading-tight px-2" style="font-family: 'Playfair Display', serif; letter-spacing: -0.02em;">
+          Tử Vi Trúc Nghi
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300 font-black mt-2">
+            Biết Vận Hạn, Nắm Cơ Hội
+          </span>
+        </h1>
+      </ScrollReveal>
+
+      <!-- Description -->
+      <ScrollReveal animation="fade-up" delay={200}>
+        <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-indigo-200 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed font-medium px-4" style="font-family: 'Inter', sans-serif;">
+          Luận giải Tử Vi/Bát Tự chi tiết, chính xác. Nhận PDF trong 24 giờ. 
+          Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe toàn diện.
+        </p>
+      </ScrollReveal>
+
+      <!-- CTA Buttons -->
+      <ScrollReveal animation="scale-up" delay={300}>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4" style="font-family: 'Inter', sans-serif;">
+          <a
+            href="#pricing"
+            class="w-full sm:w-auto group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold text-base sm:text-lg rounded-xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-500/50"
+          >
+            <Icon name="tabler:stars" class="w-4 sm:w-5 h-4 sm:h-5 mr-2 group-hover:rotate-12 transition-transform" />
+            Xem Gói Dịch Vụ
+            <Icon name="tabler:arrow-right" class="w-4 sm:w-5 h-4 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="#about"
+            class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-sm text-white font-semibold text-base sm:text-lg rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300"
+          >
+            <Icon name="tabler:info-circle" class="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+            Tìm Hiểu Thêm
+          </a>
+        </div>
+      </ScrollReveal>
+
+      <!-- Features/Stats -->
+      <ScrollReveal animation="fade-up" delay={400}>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-4xl mx-auto px-4" style="font-family: 'Inter', sans-serif;">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
+            <div class="text-2xl sm:text-3xl font-extrabold text-yellow-300 mb-1 sm:mb-2 tabular-nums">10,000+</div>
+            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Khách hàng</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
+            <div class="text-2xl sm:text-3xl font-extrabold text-green-300 mb-1 sm:mb-2 tabular-nums">4.9/5</div>
+            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Đánh giá</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
+            <div class="text-2xl sm:text-3xl font-extrabold text-blue-300 mb-1 sm:mb-2 tabular-nums">95%</div>
+            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Độ chính xác</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
+            <div class="text-2xl sm:text-3xl font-extrabold text-pink-300 mb-1 sm:mb-2 tabular-nums">24h</div>
+            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Giao PDF</div>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <!-- Scroll indicator -->
+      <ScrollReveal animation="fade-in" delay={600}>
+        <div class="mt-16">
+          <a href="#about" class="inline-block animate-bounce">
+            <Icon name="tabler:chevron-down" class="w-8 h-8 text-white/50 hover:text-white transition-colors" />
+          </a>
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+
+  <!-- Scroll fade effect -->
+  <div id="hero-overlay" class="absolute inset-0 bg-black pointer-events-none transition-opacity duration-300" style="opacity: 0;"></div>
+</section>
+
+<style>
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* Smooth scroll fade */
+  #hero {
+    transition: opacity 0.3s ease-out;
+  }
+
+  /* Optimize Vietnamese text rendering */
+  #hero h1, #hero p, #hero span {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+  }
+
+  /* Ensure proper Vietnamese character display */
+  #hero h1 {
+    font-synthesis: none;
+    font-kerning: normal;
+  }
+
+  /* Hide UnicornStudio watermark - Multiple selectors for comprehensive coverage */
+  a[href*="unicorn.studio"],
+  a[href*="unicornstudio"],
+  a[target="_blank"][rel*="noopener"],
+  #us-animation-wrapper a,
+  div[data-us-project] a,
+  div[data-us-project] > a,
+  div[data-us-project] + a,
+  .unicornstudio-watermark,
+  [class*="watermark"],
+  [id*="watermark"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+</style>
+
+<!-- Scroll effect script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const hero = document.getElementById('hero');
+    const heroOverlay = document.getElementById('hero-overlay');
+
+    window.addEventListener('scroll', function () {
+      const scrollTop = window.pageYOffset;
+      const windowHeight = window.innerHeight;
+
+      // Calculate overlay opacity based on scroll position
+      const overlayOpacity = Math.min(0.5, scrollTop / windowHeight);
+
+      if (heroOverlay) {
+        heroOverlay.style.opacity = overlayOpacity.toString();
+      }
+    });
+  });
+</script>
+
+<!-- Watermark Remover Script - Must run before UnicornStudio -->
+<script type="text/javascript" is:inline>
+  (function() {
+    // Function to aggressively remove watermark
+    function removeWatermark() {
+      // Find and remove all links containing unicorn.studio
+      var links = document.querySelectorAll('a[href*="unicorn.studio"], a[href*="unicornstudio"]');
+      links.forEach(function(link) {
+        link.remove();
+      });
+      
+      // Find and hide any remaining watermark elements
+      var watermarks = document.querySelectorAll('[class*="watermark"], [id*="watermark"]');
+      watermarks.forEach(function(el) {
+        el.style.display = 'none';
+        el.remove();
+      });
+      
+      // Check inside the animation wrapper
+      var wrapper = document.getElementById('us-animation-wrapper');
+      if (wrapper) {
+        var allLinks = wrapper.querySelectorAll('a');
+        allLinks.forEach(function(link) {
+          link.remove();
+        });
+      }
+      
+      // Check inside data-us-project div
+      var projectDiv = document.querySelector('[data-us-project]');
+      if (projectDiv) {
+        var projectLinks = projectDiv.querySelectorAll('a');
+        projectLinks.forEach(function(link) {
+          link.remove();
+        });
+      }
+    }
+    
+    // Run immediately
+    removeWatermark();
+    
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', removeWatermark);
+    }
+    
+    // Set up MutationObserver to watch for dynamically added watermarks
+    var observer = new MutationObserver(function(mutations) {
+      removeWatermark();
+    });
+    
+    // Start observing when DOM is ready
+    function startObserving() {
+      var targetNode = document.getElementById('us-animation-wrapper') || document.body;
+      observer.observe(targetNode, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class', 'id']
+      });
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startObserving);
+    } else {
+      startObserving();
+    }
+    
+    // Also run periodically for the first few seconds
+    var intervalCount = 0;
+    var checkInterval = setInterval(function() {
+      removeWatermark();
+      intervalCount++;
+      if (intervalCount > 20) { // Stop after 10 seconds (20 * 500ms)
+        clearInterval(checkInterval);
+      }
+    }, 500);
+  })();
+</script>
+
+<!-- UnicornStudio Script - Optimized Loading -->
+<script type="text/javascript" is:inline>
+  // Defer UnicornStudio loading until page is fully loaded
+  (function() {
+    function loadUnicornStudio() {
+      if (!window.UnicornStudio) {
+        window.UnicornStudio = { isInitialized: false };
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js';
+        script.async = true;
+        script.defer = true;
+        script.onload = function() {
+          if (!window.UnicornStudio.isInitialized) {
+            UnicornStudio.init();
+            window.UnicornStudio.isInitialized = true;
+            
+            // Fade in animation after initialization
+            setTimeout(function() {
+              var wrapper = document.getElementById('us-animation-wrapper');
+              if (wrapper) {
+                wrapper.style.opacity = '1';
+              }
+            }, 300);
+          }
+        };
+        (document.head || document.body).appendChild(script);
+      }
+    }
+    
+    // Use requestIdleCallback for non-critical loading, fallback to setTimeout
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadUnicornStudio, { timeout: 2000 });
+    } else {
+      // Load after page fully loaded
+      if (document.readyState === 'complete') {
+        setTimeout(loadUnicornStudio, 100);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadUnicornStudio, 100);
+        });
+      }
+    }
+  })();
+</script>

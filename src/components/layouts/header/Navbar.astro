@@ -1,0 +1,180 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20 transition-all duration-300 shadow-lg"
+  id="navbar"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="#hero" class="text-white font-bold text-xl"> Tử Vi Trúc Nghi </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-8">
+          <a
+            href="#about"
+            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })"
+          >
+            Giới thiệu
+          </a>
+          <!-- Hidden: Duplicate functionality with "Xem giá" button
+          <a
+            href="#pricing"
+            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' })"
+          >
+            Giá cả
+          </a>
+          -->
+          <a
+            href="#testimonials"
+            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            onclick="document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })"
+          >
+            Xem đánh giá
+          </a>
+          <a
+            href="#faq"
+            class="text-white hover:text-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            onclick="document.getElementById('faq').scrollIntoView({ behavior: 'smooth' })"
+          >
+            FAQ
+          </a>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hidden md:block">
+        <button
+          onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' })"
+          class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105"
+        >
+          Xem giá
+        </button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          class="text-white hover:text-yellow-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+          id="mobile-menu-button"
+        >
+          <Icon name="tabler:menu-2" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-black/50 backdrop-blur-md">
+      <a
+        href="#about"
+        class="text-white hover:text-yellow-300 block px-3 py-2 rounded-md text-base font-medium"
+        onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden');"
+      >
+        Giới thiệu
+      </a>
+      <!-- Hidden: Duplicate functionality with "Xem giá" button
+      <a
+        href="#pricing"
+        class="text-white hover:text-yellow-300 block px-3 py-2 rounded-md text-base font-medium"
+        onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden');"
+      >
+        Giá cả
+      </a>
+      -->
+      <a
+        href="#testimonials"
+        class="text-white hover:text-yellow-300 block px-3 py-2 rounded-md text-base font-medium"
+        onclick="document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden');"
+      >
+        Xem đánh giá
+      </a>
+      <a
+        href="#faq"
+        class="text-white hover:text-yellow-300 block px-3 py-2 rounded-md text-base font-medium"
+        onclick="document.getElementById('faq').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden');"
+      >
+        FAQ
+      </a>
+      <button
+        onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden');"
+        class="w-full text-left bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white block px-3 py-2 rounded-md text-base font-medium"
+      >
+        Xem giá
+      </button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Navbar scroll effect */
+  .navbar-scrolled {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const navbar = document.getElementById('navbar');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 50) {
+        navbar?.classList.add('navbar-scrolled');
+      } else {
+        navbar?.classList.remove('navbar-scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    mobileMenuButton?.addEventListener('click', function () {
+      mobileMenu?.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking on links
+    const mobileLinks = mobileMenu?.querySelectorAll('a, button');
+    mobileLinks?.forEach((link) => {
+      link.addEventListener('click', function () {
+        mobileMenu?.classList.add('hidden');
+      });
+    });
+
+    // Smooth scroll for navbar links
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    navLinks.forEach((link) => {
+      link.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          e.preventDefault();
+          const offsetTop = targetElement.offsetTop - 64; // Account for navbar height
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth',
+          });
+          
+          // Update URL without triggering page reload
+          history.pushState(null, '', targetId);
+        }
+      });
+    });
+  });
+</script>

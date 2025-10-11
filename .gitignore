@@ -1,0 +1,77 @@
+# Build output
+dist/
+.output/
+.astro/
+.vercel/
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+.env*.local
+
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db
+Desktop.ini
+
+# Linux-specific files
+*~
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Testing
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# Temporary files
+*.tmp
+*.log
+.cache/
+.temp/
+
+# AI tools
+.gemini/
+.cursor/
+.warp/
+gha-creds-*.json
+
+# Package manager files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Other
+.turbo/
+.netlify/

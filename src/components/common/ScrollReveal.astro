@@ -1,0 +1,73 @@
+---
+/**
+ * ScrollReveal Component
+ * Wraps content with scroll-triggered animations using Intersection Observer
+ * 
+ * @param animation - Type of animation: 'fade-up', 'fade-down', 'fade-left', 'fade-right', 'fade-in', 'scale-up', 'slide-up', 'zoom-in'
+ * @param delay - Animation delay in milliseconds (default: 0)
+ * @param duration - Animation duration class (default: 'duration-600')
+ * @param threshold - Intersection observer threshold (default: 0.1)
+ * @param once - Whether animation should happen only once (default: true)
+ * @param class - Additional CSS classes
+ */
+
+export interface Props {
+  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'fade-in' | 'scale-up' | 'slide-up' | 'zoom-in';
+  delay?: number;
+  duration?: string;
+  threshold?: number;
+  once?: boolean;
+  class?: string;
+}
+
+const {
+  animation = 'fade-up',
+  delay = 0,
+  duration = 'duration-600',
+  threshold = 0.1,
+  once = true,
+  class: className = '',
+} = Astro.props;
+
+// Generate unique ID for this element
+const uniqueId = `scroll-reveal-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  id={uniqueId}
+  class:list={[
+    'scroll-reveal',
+    className,
+    'opacity-0', // Initially hidden
+    duration,
+  ]}
+  data-animation={animation}
+  data-delay={delay}
+  data-threshold={threshold}
+  data-once={once}
+  style={delay > 0 ? `transition-delay: ${delay}ms;` : ''}
+>
+  <slot />
+</div>
+
+<style>
+  .scroll-reveal {
+    transition-property: opacity, transform;
+    transition-timing-function: ease-out;
+  }
+
+  /* Animation states */
+  .scroll-reveal.is-visible {
+    opacity: 1 !important;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+

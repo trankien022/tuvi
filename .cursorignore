@@ -1,0 +1,18 @@
+# Build outputs
+dist/
+.output/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Generated files
+*.map
+*.min.js
+*.min.css
+
+# Test coverage
+coverage/
+
+# Logs
+*.log

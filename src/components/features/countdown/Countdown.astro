@@ -1,0 +1,170 @@
+---
+import { Icon } from 'astro-icon/components';
+import { FALLBACK_PROMOTIONS } from '~/config/fallback-data';
+import { ScrollReveal } from '@common';
+
+// Get active promotions
+const promotions = FALLBACK_PROMOTIONS.filter(p => p.is_active);
+const activePromotion = promotions[0]; // Get the first active promotion
+---
+
+<ScrollReveal animation="fade-up">
+<section class="py-16 bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white overflow-hidden relative">
+  <!-- Background pattern -->
+  <div
+    class="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg%20width=%2240%22%20height=%2240%22%20viewBox=%220%200%2040%2040%22%20xmlns=%22http://www.w3.org/2000/svg%22%3e%3cg%20fill=%22%23ffffff%22%20fill-opacity=%220.1%22%3e%3cpath%20d=%22M20%2020c0%2011.046-8.954%2020-20%2020s-20-8.954-20-20%208.954-20%2020-20%2020%208.954%2020%2020zm-20-16c-8.837%200-16%207.163-16%2016s7.163%2016%2016%2016%2016-7.163%2016-16-7.163-16-16-16z%22/%3e%3c/g%3e%3c/svg%3e')] opacity-20"
+  ></div>
+
+  <!-- Floating elements -->
+  <div class="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl animate-pulse"></div>
+  <div class="absolute bottom-10 right-10 w-16 h-16 bg-orange-400/20 rounded-full blur-xl animate-pulse delay-1000">
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <!-- Urgency badge -->
+      <div
+        class="inline-flex items-center px-4 py-2 bg-yellow-500 text-yellow-900 rounded-full font-bold text-sm mb-6 animate-pulse"
+      >
+        <Icon name="tabler:clock-hour-4" class="w-4 h-4 mr-2" />
+        ƯU ĐÃI CÓ HẠN
+      </div>
+
+      <!-- Main heading -->
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">
+        {activePromotion ? activePromotion.title : 'Ưu Đãi Đặc Biệt'}
+      </h2>
+
+      <p class="text-xl md:text-2xl mb-8 text-red-100">
+        {activePromotion ? activePromotion.description : 'Giảm giá 25% cho tất cả gói luận giải'}
+      </p>
+
+      <!-- Countdown timer -->
+      <div class="mb-8">
+        <div id="countdown-timer" class="flex justify-center items-center space-x-4 md:space-x-8">
+          <div class="text-center">
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px]">
+              <div id="days" class="text-2xl md:text-4xl font-bold text-yellow-300">00</div>
+              <div class="text-xs md:text-sm text-red-200 uppercase tracking-wide">Ngày</div>
+            </div>
+          </div>
+          <div class="text-2xl md:text-4xl font-bold text-yellow-300">:</div>
+          <div class="text-center">
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px]">
+              <div id="hours" class="text-2xl md:text-4xl font-bold text-yellow-300">00</div>
+              <div class="text-xs md:text-sm text-red-200 uppercase tracking-wide">Giờ</div>
+            </div>
+          </div>
+          <div class="text-2xl md:text-4xl font-bold text-yellow-300">:</div>
+          <div class="text-center">
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px]">
+              <div id="minutes" class="text-2xl md:text-4xl font-bold text-yellow-300">00</div>
+              <div class="text-xs md:text-sm text-red-200 uppercase tracking-wide">Phút</div>
+            </div>
+          </div>
+          <div class="text-2xl md:text-4xl font-bold text-yellow-300">:</div>
+          <div class="text-center">
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px]">
+              <div id="seconds" class="text-2xl md:text-4xl font-bold text-yellow-300">00</div>
+              <div class="text-xs md:text-sm text-red-200 uppercase tracking-wide">Giây</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warning message -->
+      <div class="bg-yellow-500/20 border border-yellow-400/30 rounded-xl p-6 mb-8 backdrop-blur-sm">
+        <div class="flex items-center justify-center space-x-3 mb-3">
+          <Icon name="tabler:alert-triangle" class="w-6 h-6 text-yellow-300" />
+          <span class="text-lg font-semibold text-yellow-100">Chỉ còn ít thời gian!</span>
+        </div>
+        <p class="text-red-100">
+          Sau khi hết thời gian, giá sẽ trở lại mức bình thường.
+          <span class="font-semibold text-yellow-300">Đặt hàng ngay để không bỏ lỡ!</span>
+        </p>
+      </div>
+
+      <!-- CTA Button -->
+      <button
+        onclick="document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' })"
+        class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-white font-bold text-lg rounded-xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105"
+      >
+        <Icon name="tabler:flame" class="w-5 h-5 mr-2 group-hover:animate-bounce" />
+        ĐẶT NGAY - TIẾT KIỆM {activePromotion?.discount_percent || 25}%
+        <Icon name="tabler:arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+      </button>
+
+      <!-- Social proof -->
+      <div class="mt-8 flex items-center justify-center space-x-6 text-red-200">
+        <div class="flex items-center space-x-2">
+          <Icon name="tabler:users" class="w-5 h-5" />
+          <span class="text-sm">127 người đã đặt hôm nay</span>
+        </div>
+        <div class="w-1 h-1 bg-red-300 rounded-full"></div>
+        <div class="flex items-center space-x-2">
+          <Icon name="tabler:clock" class="w-5 h-5" />
+          <span class="text-sm">Giao PDF trong 24h</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</ScrollReveal>
+
+<script define:vars={{ deadline: activePromotion?.deadline_at }}>
+  function initCountdown() {
+    // Get deadline from server or fallback to localStorage
+    let targetDate;
+
+    if (deadline) {
+      targetDate = new Date(deadline).getTime();
+    } else {
+      // Check if we have a stored deadline
+      const stored = localStorage.getItem('promotion_deadline');
+      if (stored) {
+        targetDate = parseInt(stored);
+      } else {
+        // Create new deadline (7 days from now) and store it
+        targetDate = new Date().getTime() + 7 * 24 * 60 * 60 * 1000;
+        localStorage.setItem('promotion_deadline', targetDate.toString());
+      }
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        // Timer expired
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Update immediately
+    updateCountdown();
+
+    // Update every second
+    setInterval(updateCountdown, 1000);
+  }
+
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCountdown);
+  } else {
+    initCountdown();
+  }
+</script>

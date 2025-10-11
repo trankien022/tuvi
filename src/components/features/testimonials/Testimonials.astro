@@ -1,0 +1,114 @@
+---
+import { Icon } from 'astro-icon/components';
+import { FALLBACK_TESTIMONIALS } from '~/config/fallback-data';
+import Marquee from '~/components/magicui/marquee.tsx';
+import { ReviewCard } from './ReviewCard';
+import { ScrollReveal } from '@common';
+
+// Use fallback testimonials
+const testimonials = FALLBACK_TESTIMONIALS;
+
+// Split testimonials into two rows for alternating marquee effect
+const firstRow = testimonials.slice(0, Math.ceil(testimonials.length / 2));
+const secondRow = testimonials.slice(Math.ceil(testimonials.length / 2));
+---
+
+<section class="py-12 sm:py-16 md:py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <ScrollReveal animation="fade-up" class="text-center mb-10 sm:mb-12 md:mb-16">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+      <p class="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto px-4">
+        Hơn 10,000+ khách hàng đã tin tưởng và hài lòng với dịch vụ luận giải tử vi của chúng tôi
+      </p>
+    </ScrollReveal>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-10 sm:mb-12 md:mb-16">
+      <ScrollReveal animation="scale-up" delay={0}>
+        <div class="text-center">
+          <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-600 mb-1 sm:mb-2">10,000+</div>
+          <div class="text-xs sm:text-sm md:text-base text-gray-600">Khách hàng</div>
+        </div>
+      </ScrollReveal>
+      <ScrollReveal animation="scale-up" delay={100}>
+        <div class="text-center">
+          <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 mb-1 sm:mb-2">4.9/5</div>
+          <div class="text-xs sm:text-sm md:text-base text-gray-600">Đánh giá</div>
+        </div>
+      </ScrollReveal>
+      <ScrollReveal animation="scale-up" delay={200}>
+        <div class="text-center">
+          <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-1 sm:mb-2">95%</div>
+          <div class="text-xs sm:text-sm md:text-base text-gray-600">Độ chính xác</div>
+        </div>
+      </ScrollReveal>
+      <ScrollReveal animation="scale-up" delay={300}>
+        <div class="text-center">
+          <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-600 mb-1 sm:mb-2">24h</div>
+          <div class="text-xs sm:text-sm md:text-base text-gray-600">Giao PDF</div>
+        </div>
+      </ScrollReveal>
+    </div>
+
+    <!-- Testimonials marquee with Magic UI pattern -->
+    <div class="relative flex w-full flex-col items-center justify-center overflow-hidden mb-8">
+      <Marquee pauseOnHover={true} className="[--duration:30s] mb-4" client:load>
+        {
+          firstRow.map((testimonial) => (
+            <ReviewCard
+              customerName={testimonial.customer_name}
+              review={testimonial.review}
+              rating={testimonial.rating}
+              isVerified={testimonial.is_verified}
+              client:load
+            />
+          ))
+        }
+      </Marquee>
+      <Marquee reverse={true} pauseOnHover={true} className="[--duration:30s]" client:load>
+        {
+          secondRow.map((testimonial) => (
+            <ReviewCard
+              customerName={testimonial.customer_name}
+              review={testimonial.review}
+              rating={testimonial.rating}
+              isVerified={testimonial.is_verified}
+              client:load
+            />
+          ))
+        }
+      </Marquee>
+      <!-- Gradient fade effects -->
+      <div class="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-gray-50"></div>
+      <div class="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-gray-50"></div>
+    </div>
+
+    <!-- Featured testimonial -->
+    <ScrollReveal animation="fade-up" class="mt-10 sm:mt-12 md:mt-16">
+    <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex justify-center mb-4 sm:mb-6">
+          <div class="flex text-yellow-400 text-xl sm:text-2xl">
+            {Array.from({ length: 5 }, (_, i) => <Icon name="tabler:star-filled" class="w-5 h-5 sm:w-6 sm:h-6" key={i} />)}
+          </div>
+        </div>
+
+        <blockquote class="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-6 sm:mb-8 leading-relaxed px-2">
+          "Tôi đã thử nhiều dịch vụ luận giải tử vi khác nhưng chưa có nơi nào chi tiết và chính xác như Trúc Nghi. PDF
+          được thiết kế đẹp mắt, dễ hiểu và những dự đoán về sự nghiệp đã trở thành hiện thực. Đặc biệt là phần tư vấn
+          trực tiếp rất tâm huyết và nhiệt tình."
+        </blockquote>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold flex-shrink-0">N</div>
+          <div class="text-center sm:text-left">
+            <div class="font-semibold text-base sm:text-lg">Nguyễn Thị Lan Anh</div>
+            <div class="text-purple-200 text-sm sm:text-base">Giám đốc Marketing, TP.HCM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </ScrollReveal>
+  </div>
+</section>

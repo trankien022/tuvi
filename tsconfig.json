@@ -1,0 +1,44 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      // Core aliases
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@ui/*": ["src/components/ui/*"],
+      "@features/*": ["src/components/features/*"],
+      "@layouts/*": ["src/components/layouts/*"],
+      "@common/*": ["src/components/common/*"],
+      
+      // Logic aliases
+      "@lib/*": ["src/lib/*"],
+      "@utils/*": ["src/lib/utils/*"],
+      "@hooks/*": ["src/lib/hooks/*"],
+      "@db/*": ["src/lib/db/*"],
+      "@security/*": ["src/lib/security/*"],
+      "@seo/*": ["src/lib/seo/*"],
+      
+      // Config & Types
+      "@config/*": ["src/config/*"],
+      "@types/*": ["src/types/*"],
+      
+      // Assets
+      "@assets/*": ["src/assets/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@styles/*": ["src/assets/styles/*"],
+      
+      // Pages & Sections
+      "@pages/*": ["src/pages/*"],
+      "@sections/*": ["src/sections/*"],
+      
+      // Keep legacy alias for backward compatibility
+      "~/*": ["src/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist/"]
+}
