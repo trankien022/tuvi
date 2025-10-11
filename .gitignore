@@ -75,3 +75,4 @@ package-lock.json
 # Other
 .turbo/
 .netlify/
+.vercel
