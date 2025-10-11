@@ -16,3 +16,6 @@ coverage/
 
 # Logs
 *.log
+
+# Allow .env file for editing (but still in .gitignore for security)
+!.env

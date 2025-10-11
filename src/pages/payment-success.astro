@@ -1,0 +1,261 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
+
+// Get URL params from PayOS
+const url = new URL(Astro.request.url);
+const orderCode = url.searchParams.get('orderCode') || '';
+const status = url.searchParams.get('status') || '';
+
+const metadata = {
+  title: 'Thanh toán thành công - Tử Vi Trúc Nghi',
+  description: 'Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ gửi báo cáo tử vi chi tiết trong 24-48h.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Main Content -->
+  <main class="min-h-screen bg-gradient-to-b from-background via-background to-muted/20 py-12 sm:py-16">
+    <div class="container px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+      <!-- Success Icon -->
+      <div class="text-center mb-8 animate-in fade-in slide-in-from-bottom duration-500">
+        <div class="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-green-500/10 mb-6">
+          <svg
+            class="w-10 h-10 sm:w-12 sm:h-12 text-green-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-green-600 dark:text-green-500 mb-4">
+          Thanh toán thành công!
+        </h1>
+        <p class="text-lg sm:text-xl text-muted-foreground">
+          Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi
+        </p>
+      </div>
+
+      <!-- Order Info Card -->
+      {orderCode && (
+        <Card class="mb-8 border-2 border-green-500/20 animate-in fade-in slide-in-from-bottom duration-500 delay-100">
+          <CardHeader>
+            <CardTitle>Thông tin đơn hàng</CardTitle>
+            <CardDescription>Mã đơn hàng của bạn</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="flex items-center justify-between p-4 bg-muted rounded-lg">
+              <div>
+                <p class="text-sm text-muted-foreground mb-1">Mã đơn hàng</p>
+                <p class="text-xl font-mono font-bold">{orderCode}</p>
+              </div>
+              <div class="p-2 bg-green-500/10 rounded">
+                <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <!-- Next Steps -->
+      <Card class="mb-8 animate-in fade-in slide-in-from-bottom duration-500 delay-200">
+        <CardHeader>
+          <CardTitle>Bước tiếp theo</CardTitle>
+          <CardDescription>Những gì sẽ xảy ra sau đây</CardDescription>
+        </CardHeader>
+        <CardContent class="space-y-4">
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+              1
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Xác nhận qua Email</h3>
+              <p class="text-sm text-muted-foreground">
+                Bạn sẽ nhận được email xác nhận đơn hàng trong vài phút tới
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+              2
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Chúng tôi bắt đầu luận giải</h3>
+              <p class="text-sm text-muted-foreground">
+                Đội ngũ chuyên gia của chúng tôi sẽ phân tích và luận giải tử vi của bạn
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+              3
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Nhận báo cáo PDF</h3>
+              <p class="text-sm text-muted-foreground">
+                Trong vòng <strong>24-48 giờ</strong>, bạn sẽ nhận được báo cáo chi tiết qua email
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+              4
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">Hỗ trợ tư vấn</h3>
+              <p class="text-sm text-muted-foreground">
+                Nếu có thắc mắc, bạn có thể liên hệ với chúng tôi để được tư vấn thêm
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Important Notice -->
+      <Card class="mb-8 border-2 border-blue-500/20 bg-blue-500/5 animate-in fade-in slide-in-from-bottom duration-500 delay-300">
+        <CardHeader>
+          <CardTitle class="flex items-center gap-2 text-blue-600 dark:text-blue-500">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            Lưu ý quan trọng
+          </CardTitle>
+        </CardHeader>
+        <CardContent class="space-y-3 text-sm">
+          <div class="flex items-start gap-2">
+            <span class="text-blue-500">•</span>
+            <p>Vui lòng kiểm tra cả hộp thư <strong>Spam/Junk</strong> nếu bạn không thấy email từ chúng tôi</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-blue-500">•</span>
+            <p>Báo cáo PDF sẽ được gửi đến email bạn đã đăng ký</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-blue-500">•</span>
+            <p>Nếu có vấn đề, vui lòng liên hệ với chúng tôi qua các kênh hỗ trợ bên dưới</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Contact Support -->
+      <Card class="mb-8 animate-in fade-in slide-in-from-bottom duration-500 delay-400">
+        <CardHeader>
+          <CardTitle>Cần hỗ trợ?</CardTitle>
+          <CardDescription>Liên hệ với chúng tôi</CardDescription>
+        </CardHeader>
+        <CardContent class="space-y-3">
+          <a
+            href="tel:+84901234567"
+            class="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+          >
+            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+            </svg>
+            <div>
+              <p class="font-medium">Hotline</p>
+              <p class="text-sm text-muted-foreground">+84 901 234 567</p>
+            </div>
+          </a>
+
+          <a
+            href="mailto:support@trucnghi.com"
+            class="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+          >
+            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+            </svg>
+            <div>
+              <p class="font-medium">Email</p>
+              <p class="text-sm text-muted-foreground">support@trucnghi.com</p>
+            </div>
+          </a>
+        </CardContent>
+      </Card>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-500 delay-500">
+        <a href="/" class="flex-1">
+          <Button variant="outline" class="w-full">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            Về trang chủ
+          </Button>
+        </a>
+        <a href="/#pricing" class="flex-1">
+          <Button class="w-full">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Xem thêm gói dịch vụ
+          </Button>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    @keyframes slide-in-from-bottom {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: slide-in-from-bottom 0.5s ease-out;
+    }
+
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-500 {
+      animation-delay: 0.5s;
+    }
+  </style>
+</Layout>
+

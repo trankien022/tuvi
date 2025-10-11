@@ -1,0 +1,197 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { RegistrationForm } from '@features/registration';
+import { Toaster } from '~/components/ui/toaster';
+import { FALLBACK_PACKAGES } from '~/config/fallback-data';
+
+// Get URL params
+const url = new URL(Astro.request.url);
+const packageId = url.searchParams.get('packageId') || '';
+const packageName = url.searchParams.get('packageName') || '';
+const priceParam = url.searchParams.get('price') || '0';
+const price = parseInt(priceParam);
+
+// Validate params
+if (!packageId || !packageName || !price) {
+  return Astro.redirect('/#pricing');
+}
+
+// Find package details from fallback data
+const packageData = FALLBACK_PACKAGES.find((pkg) => pkg.id === packageId);
+
+// Prepare package info
+const packageInfo = {
+  id: packageId,
+  name: packageName,
+  price: price,
+  features: packageData?.features || [],
+};
+
+const metadata = {
+  title: `Đăng ký ${packageName} - Tử Vi Trúc Nghi`,
+  description: `Hoàn tất đăng ký gói ${packageName} và thanh toán để nhận báo cáo tử vi chi tiết trong 24-48h.`,
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Critical CSS -->
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%);
+    }
+
+    .animate-in {
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Improve mobile form inputs */
+    @media (max-width: 640px) {
+      /* Ensure inputs are at least 16px to prevent zoom on iOS */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      
+      /* Better touch targets */
+      button, a {
+        min-height: 44px;
+      }
+      
+      /* Prevent horizontal scroll */
+      body {
+        overflow-x: hidden;
+      }
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Fix for iOS safe area */
+    @supports (padding: max(0px)) {
+      .container {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+      }
+    }
+  </style>
+
+  <!-- Header with Back Button -->
+  <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="container flex h-14 sm:h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a
+        href="/"
+        class="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <svg
+          class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span class="hidden sm:inline">Quay lại trang chủ</span>
+        <span class="sm:hidden">Quay lại</span>
+      </a>
+      <a href="/" class="text-base sm:text-xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+        Tử Vi Trúc Nghi
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="min-h-screen bg-gradient-to-b from-background via-background to-muted/20 py-8 sm:py-12">
+    <div class="container px-4 sm:px-6 lg:px-8">
+      <!-- Page Header -->
+      <div class="text-center mb-8 sm:mb-12 space-y-3 sm:space-y-4">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          Hoàn tất đăng ký
+        </h1>
+        <p class="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+          Điền đầy đủ thông tin để chúng tôi có thể luận giải chính xác và gửi báo cáo cho bạn
+        </p>
+      </div>
+
+      <!-- Registration Form -->
+      <RegistrationForm client:load packageInfo={packageInfo} />
+
+      <!-- Trust Indicators -->
+      <div class="mt-8 sm:mt-12 md:mt-16 max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+          <div class="flex items-center sm:justify-center gap-3 p-3 sm:p-4 rounded-lg bg-card border border-border hover:shadow-md transition-shadow">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <div class="text-xs sm:text-sm font-medium">Thanh toán an toàn</div>
+              <div class="text-[10px] sm:text-xs text-muted-foreground">PayOS bảo mật</div>
+            </div>
+          </div>
+
+          <div class="flex items-center sm:justify-center gap-3 p-3 sm:p-4 rounded-lg bg-card border border-border hover:shadow-md transition-shadow">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <div class="text-xs sm:text-sm font-medium">Nhận PDF trong 24-48h</div>
+              <div class="text-[10px] sm:text-xs text-muted-foreground">Giao hàng nhanh</div>
+            </div>
+          </div>
+
+          <div class="flex items-center sm:justify-center gap-3 p-3 sm:p-4 rounded-lg bg-card border border-border hover:shadow-md transition-shadow">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <div class="text-xs sm:text-sm font-medium">Bảo mật tuyệt đối</div>
+              <div class="text-[10px] sm:text-xs text-muted-foreground">Thông tin an toàn</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toaster for notifications -->
+  <Toaster client:load />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `Đăng ký ${packageName}`,
+    description: `Hoàn tất đăng ký gói ${packageName}`,
+    provider: {
+      '@type': 'Organization',
+      name: 'Tử Vi Trúc Nghi',
+      url: 'https://trucnghi.vercel.app',
+    },
+  })} />
+</Layout>
+

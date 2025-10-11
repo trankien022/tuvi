@@ -65,12 +65,23 @@ gha-creds-*.json
 # Package manager files
 pnpm-lock.yaml
 yarn.lock
-package-lock.json
+# Keep package-lock.json for production consistency
+# package-lock.json
 
 # Backup files
 *.bak
 *.backup
 *~
+
+# Documentation (temporary/development notes - uncomment if needed)
+# CHANGELOG_*.md
+# *_SUMMARY.md
+# *_FIX.md
+# *_QUICK_*.md
+# GEMINI.md
+# WARP.md
+# README_*.md
+# CREATE_*.md
 
 # Other
 .turbo/

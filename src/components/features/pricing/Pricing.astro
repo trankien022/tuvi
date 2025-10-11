@@ -8,6 +8,34 @@ const packages = FALLBACK_PACKAGES;
 console.log('Pricing component - packages loaded:', packages.length);
 ---
 
+<script is:inline>
+  // Function to handle package selection - must be defined before React components load
+  function selectPackage(packageId, packageName, price) {
+    // Track package selection
+    const gtag = window.gtag;
+    if (typeof gtag === 'function') {
+      gtag('event', 'select_item', {
+        item_id: packageId,
+        item_name: packageName,
+        item_category: 'service_package',
+        value: price / 1000, // Convert to thousands
+        currency: 'VND',
+      });
+    }
+
+    // Redirect to registration page with package details
+    const params = new URLSearchParams({
+      packageId: packageId,
+      packageName: packageName,
+      price: price.toString(),
+    });
+    window.location.href = `/register?${params.toString()}`;
+  }
+
+  // Make function available globally
+  window.selectPackage = selectPackage;
+</script>
+
 <section id="pricing" class="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-background via-background to-muted/20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section header -->
@@ -38,10 +66,6 @@ console.log('Pricing component - packages loaded:', packages.length);
               features={pkg.features}
               isFeatured={pkg.is_featured}
               isPopular={pkg.is_popular}
-              onSelect={(id, name, price) => {
-                // @ts-expect-error: `selectPackage` is a global function.
-                window.selectPackage(id, name, price);
-              }}
             />
           </ScrollReveal>
         ))
@@ -89,26 +113,3 @@ console.log('Pricing component - packages loaded:', packages.length);
     </ScrollReveal>
   </div>
 </section>
-
-<script>
-  // Function to handle package selection
-  function selectPackage(packageId: string, packageName: string, price: number) {
-    // Track package selection
-    const gtag = (window as any).gtag;
-    if (typeof gtag === 'function') {
-      gtag('event', 'select_item', {
-        item_id: packageId,
-        item_name: packageName,
-        item_category: 'service_package',
-        value: price / 1000, // Convert to thousands
-        currency: 'VND',
-      });
-    }
-
-    // Show notification that order page has been removed
-    alert('Tính năng đặt hàng tạm thời không khả dụng. Vui lòng liên hệ trực tiếp để đặt hàng.');
-  }
-
-  // Make function available globally
-  (window as any).selectPackage = selectPackage;
-</script>

@@ -14,7 +14,6 @@ interface PricingCardProps {
   features?: string[];
   isFeatured?: boolean;
   isPopular?: boolean;
-  onSelect: (id: string, name: string, price: number) => void;
 }
 
 export function PricingCard({
@@ -26,7 +25,6 @@ export function PricingCard({
   features = [],
   isFeatured = false,
   isPopular = false,
-  onSelect,
 }: PricingCardProps) {
   const isHighlighted = isFeatured || isPopular;
   const hasDiscount = originalPrice !== null && originalPrice !== undefined && originalPrice > price;
@@ -108,7 +106,14 @@ export function PricingCard({
 
       <CardFooter className="pt-0 pb-4 sm:pb-6">
         <Button
-          onClick={() => onSelect(id, name, price)}
+          onClick={() => {
+            // Call the global selectPackage function
+            if (typeof window !== 'undefined' && window.selectPackage) {
+              window.selectPackage(id, name, price);
+            } else {
+              console.error('selectPackage function not found on window');
+            }
+          }}
           className={cn(
             'w-full font-semibold transition-all duration-300 group-hover:scale-105 text-sm sm:text-base h-10 sm:h-11',
             isHighlighted

@@ -12,6 +12,7 @@ declare global {
       params: any;
     }>;
     toggleFAQ?: (button: HTMLElement) => void;
+    selectPackage?: (packageId: string, packageName: string, price: number) => void;
   }
 
   // Performance API extensions
