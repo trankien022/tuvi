@@ -51,3 +51,21 @@ export const ANALYTICS_EVENTS = {
   scrollDepth: 'scroll_depth',
   packageSelect: 'package_select',
 } as const;
+
+// ===========================
+// Validation Configuration
+// ===========================
+export const VALIDATION_CONFIG = {
+  phone: {
+    pattern: /^[0-9]{10,11}$/,
+    minLength: 10,
+    maxLength: 11,
+  },
+  email: {
+    maxLength: 254,
+  },
+  name: {
+    minLength: 2,
+    maxLength: 100,
+  },
+} as const;
