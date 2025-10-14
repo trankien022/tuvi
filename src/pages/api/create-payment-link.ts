@@ -1,6 +1,12 @@
 import type { APIRoute } from 'astro';
+import { withSecurity } from '~/lib/security/middleware';
 
-export const POST: APIRoute = async ({ request, site }) => {
+function isProduction(): boolean {
+  const mode = (import.meta as any).env?.MODE || process.env.NODE_ENV;
+  return mode === 'production';
+}
+
+export const POST: APIRoute = withSecurity(async ({ request, site }) => {
   try {
     const body = await request.json();
     const {
@@ -13,7 +19,17 @@ export const POST: APIRoute = async ({ request, site }) => {
       packageName,
     } = body;
 
-    console.log('Received request body:', body);
+    if (!isProduction()) {
+      console.log('Received request body (sanitized):', {
+        orderCode,
+        amount,
+        description: description?.slice(0, 64),
+        buyerName: buyerName?.slice(0, 32),
+        buyerEmail: buyerEmail ? '***' : undefined,
+        buyerPhone: buyerPhone ? '***' : undefined,
+        packageName,
+      });
+    }
 
     // Validate required fields
     if (!orderCode || !amount || !description) {
@@ -36,14 +52,13 @@ export const POST: APIRoute = async ({ request, site }) => {
     const apiKey = import.meta.env.PAYOS_API_KEY;
     const checksumKey = import.meta.env.PAYOS_CHECKSUM_KEY;
 
-    console.log('PayOS Credentials check:', {
-      hasClientId: !!clientId,
-      hasApiKey: !!apiKey,
-      hasChecksumKey: !!checksumKey,
-      clientIdLength: clientId?.length || 0,
-      apiKeyLength: apiKey?.length || 0,
-      checksumKeyLength: checksumKey?.length || 0,
-    });
+    if (!isProduction()) {
+      console.log('PayOS Credentials check:', {
+        hasClientId: !!clientId,
+        hasApiKey: !!apiKey,
+        hasChecksumKey: !!checksumKey,
+      });
+    }
 
     if (!clientId || !apiKey || !checksumKey) {
       console.error('PayOS credentials are not configured');
@@ -62,12 +77,12 @@ export const POST: APIRoute = async ({ request, site }) => {
     }
 
     // Dynamic import PayOS to avoid SSR constructor issues
-    console.log('Importing PayOS module...');
+    if (!isProduction()) console.log('Importing PayOS module...');
     const { PayOS } = await import('@payos/node');
     
-    console.log('Creating PayOS instance...');
+    if (!isProduction()) console.log('Creating PayOS instance...');
     const payOS = new PayOS(clientId, apiKey, checksumKey);
-    console.log('PayOS instance created successfully');
+    if (!isProduction()) console.log('PayOS instance created successfully');
 
     // Get base URL - try multiple sources
     const siteUrl = site?.toString()?.replace(/\/$/, '');
@@ -76,15 +91,13 @@ export const POST: APIRoute = async ({ request, site }) => {
     const returnUrl = `${baseUrl}/payment-success`;
     const cancelUrl = `${baseUrl}/payment-cancel`;
 
-    console.log('URLs:', { 
-      siteUrl,
-      envUrl,
-      baseUrl, 
-      returnUrl, 
-      cancelUrl,
-      hasSite: !!site,
-      hasEnvUrl: !!envUrl,
-    });
+    if (!isProduction()) {
+      console.log('URLs:', { 
+        baseUrl, 
+        returnUrl, 
+        cancelUrl,
+      });
+    }
 
     // Create payment link request
     const paymentData = {
@@ -113,12 +126,12 @@ export const POST: APIRoute = async ({ request, site }) => {
       paymentData.buyerPhone = buyerPhone;
     }
 
-    console.log('Creating PayOS payment link with data:', paymentData);
+    if (!isProduction()) console.log('Creating PayOS payment link with data:', paymentData);
 
     // Call PayOS API to create payment link using v2 API
     const paymentLinkResponse = await payOS.paymentRequests.create(paymentData);
 
-    console.log('PayOS response:', paymentLinkResponse);
+    if (!isProduction()) console.log('PayOS response:', paymentLinkResponse);
 
     // Return success response with checkout URL
     return new Response(
@@ -135,39 +148,8 @@ export const POST: APIRoute = async ({ request, site }) => {
       }
     );
   } catch (error) {
-    console.error('PayOS API Error:', error);
-    console.error('Error details:', {
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined,
-      errorType: typeof error,
-      errorConstructor: error?.constructor?.name,
-      errorString: String(error),
-    });
-
-    // Try to extract more details from error
-    if (error && typeof error === 'object') {
-      console.error('Error object keys:', Object.keys(error));
-      
-      // Check for axios-style errors (PayOS SDK uses axios)
-      const errorObj = error as any;
-      if (errorObj.response) {
-        console.error('HTTP Response Error:', {
-          status: errorObj.response.status,
-          statusText: errorObj.response.statusText,
-          data: errorObj.response.data,
-          headers: errorObj.response.headers,
-        });
-      }
-      
-      if (errorObj.request) {
-        console.error('Request details:', {
-          method: errorObj.request.method,
-          url: errorObj.request.url,
-          headers: errorObj.request.headers,
-        });
-      }
-      
-      console.error('Full error object:', JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
+    if (!isProduction()) {
+      console.error('PayOS API Error:', error);
     }
 
     // Handle specific PayOS errors
@@ -206,5 +188,5 @@ export const POST: APIRoute = async ({ request, site }) => {
       }
     );
   }
-};
+});
 

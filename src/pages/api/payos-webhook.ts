@@ -1,8 +1,75 @@
 import type { APIRoute } from 'astro';
+import crypto from 'crypto';
+import { withSecurity } from '~/lib/security/middleware';
 
-export const POST: APIRoute = async ({ request }) => {
+function constantTimeEqual(a: string, b: string): boolean {
+  const bufA = Buffer.from(a);
+  const bufB = Buffer.from(b);
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+
+function isProduction(): boolean {
+  // Astro uses import.meta.env.MODE
+  const mode = (import.meta as any).env?.MODE || process.env.NODE_ENV;
+  return mode === 'production';
+}
+
+export const POST: APIRoute = withSecurity(async ({ request }) => {
   try {
-    const body = await request.json();
+    // Read raw body for signature verification
+    const rawBody = await request.text();
+
+    // Verify webhook signature using HMAC SHA-256 with PAYOS_CHECKSUM_KEY
+    const checksumKey = import.meta.env.PAYOS_CHECKSUM_KEY;
+    const signatureHeaderCandidates = [
+      'x-payos-signature',
+      'x-signature',
+      'payos-signature',
+    ];
+    const incomingSignature = signatureHeaderCandidates
+      .map((h) => request.headers.get(h) || '')
+      .find((val) => Boolean(val));
+
+    if (checksumKey) {
+      if (!incomingSignature) {
+        if (isProduction()) {
+          return new Response(
+            JSON.stringify({ success: false, message: 'Missing webhook signature' }),
+            { status: 401, headers: { 'Content-Type': 'application/json' } }
+          );
+        }
+        console.warn('Webhook signature header missing - allowed in non-production');
+      } else {
+        const computed = crypto
+          .createHmac('sha256', checksumKey)
+          .update(rawBody)
+          .digest('hex');
+
+        const computedAlt = Buffer.from(
+          crypto.createHmac('sha256', checksumKey).update(rawBody).digest()
+        ).toString('base64');
+
+        const isValid =
+          constantTimeEqual(incomingSignature, computed) ||
+          constantTimeEqual(incomingSignature, computed.toLowerCase()) ||
+          constantTimeEqual(incomingSignature, computed.toUpperCase()) ||
+          constantTimeEqual(incomingSignature, computedAlt);
+
+        if (!isValid) {
+          if (isProduction()) {
+            return new Response(
+              JSON.stringify({ success: false, message: 'Invalid webhook signature' }),
+              { status: 401, headers: { 'Content-Type': 'application/json' } }
+            );
+          }
+          console.warn('Invalid webhook signature - allowed in non-production');
+        }
+      }
+    }
+
+    // Parse body after signature verification
+    const body = JSON.parse(rawBody);
     const { data, type } = body;
 
     console.log('PayOS webhook received:', { type, data });
@@ -22,14 +89,6 @@ export const POST: APIRoute = async ({ request }) => {
           },
         }
       );
-    }
-
-    // Verify webhook signature (optional but recommended for security)
-    const checksumKey = import.meta.env.PAYOS_CHECKSUM_KEY;
-    if (checksumKey) {
-      // In a real implementation, you would verify the webhook signature here
-      // For now, we'll skip this for simplicity
-      console.log('Webhook signature verification skipped (implement for production)');
     }
 
     const { orderCode, status, amount, description } = data;
@@ -130,4 +189,4 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   }
-};
+});

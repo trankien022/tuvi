@@ -1,6 +1,11 @@
 import type { APIRoute } from 'astro';
+import { withSecurity } from '~/lib/security/middleware';
 
-export const POST: APIRoute = async ({ request }) => {
+function isProduction(): boolean {
+  const mode = (import.meta as any).env?.MODE || process.env.NODE_ENV;
+  return mode === 'production';
+}
+export const POST: APIRoute = withSecurity(async ({ request }) => {
   try {
     const body = await request.json();
     const {
@@ -64,15 +69,16 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     };
 
-    console.log('Updating payment status in Google Sheets:', {
-      orderCode,
-      paymentStatus,
-      // Don't log sensitive info in production
-      ...(registrationData && {
-        email: '***',
-        phone: '***',
-      }),
-    });
+    if (!isProduction()) {
+      console.log('Updating payment status in Google Sheets:', {
+        orderCode,
+        paymentStatus,
+        ...(registrationData && {
+          email: '***',
+          phone: '***',
+        }),
+      });
+    }
 
     // Send update request to Google Sheets
     const response = await fetch(googleSheetsUrl, {
@@ -90,7 +96,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Google Apps Script returns text/html, not application/json
     const textResponse = await response.text();
     
-    console.log('Google Sheets update response:', textResponse);
+    if (!isProduction()) console.log('Google Sheets update response:', textResponse);
 
     // Try to parse as JSON
     let result;
@@ -123,7 +129,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   } catch (error) {
-    console.error('Payment status update error:', error);
+    if (!isProduction()) console.error('Payment status update error:', error);
 
     let errorMessage = 'Failed to update payment status';
     if (error instanceof Error) {
@@ -144,4 +150,4 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   }
-};
+});
