@@ -11,7 +11,7 @@ metadata:
   title:
     default: 'Tử Vi Trúc Nghi – Luận giải Tử Vi/Bát Tự'
     template: '%s — Tử Vi Trúc Nghi'
-  description: 'Luận giải Tử Vi chuyên nghiệp - Biết vận hạn, nắm cơ hội, tránh rủi ro. Nhận PDF chi tiết trong 24 giờ. Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe.'
+  description: 'Luận giải Tử Vi chuyên nghiệp - Biết vận hạn, nắm cơ hội, tránh rủi ro. Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe.'
   robots:
     index: true
     follow: true

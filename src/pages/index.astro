@@ -14,7 +14,7 @@ import { ScrollReveal } from '@common';
 const metadata = {
   title: 'Tử Vi Trúc Nghi – Luận giải Tử Vi/Bát Tự chuyên nghiệp',
   description:
-    'Luận giải Tử Vi chuyên nghiệp - Biết vận hạn, nắm cơ hội, tránh rủi ro. Nhận PDF chi tiết trong 24 giờ. Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe.',
+    'Luận giải Tử Vi chuyên nghiệp - Biết vận hạn, nắm cơ hội, tránh rủi ro. Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe.',
   canonical: 'https://trucnghi.vercel.app',
   image: {
     src: '~/assets/images/trucnghi-og.png',
@@ -239,7 +239,7 @@ const jsonLD = {
   <!-- Performance optimizations -->
   <script>
 
-    // Intersection Observer for lazy loading
+    // Intersection Observer for lazy loading with optimized settings
     if ('IntersectionObserver' in window) {
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
@@ -252,6 +252,9 @@ const jsonLD = {
             }
           }
         });
+      }, {
+        rootMargin: '50px',
+        threshold: 0.01
       });
 
       document.querySelectorAll('img[data-src]').forEach((img) => {
@@ -300,16 +303,29 @@ const jsonLD = {
       }
     }
 
-    // Track scroll depth
+    // Track scroll depth with throttle
     let maxScroll = 0;
-    window.addEventListener('scroll', () => {
+    let scrollTimeout: number | null = null;
+    
+    const handleScroll = () => {
       const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
 
       if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
         maxScroll = scrollPercent;
         trackEvent('scroll_depth', 'engagement', `${scrollPercent}%`);
       }
-    });
+    };
+    
+    const throttledScroll = () => {
+      if (scrollTimeout !== null) return;
+      
+      scrollTimeout = window.setTimeout(() => {
+        handleScroll();
+        scrollTimeout = null;
+      }, 200);
+    };
+    
+    window.addEventListener('scroll', throttledScroll, { passive: true });
 
     // Track CTA clicks
     document.addEventListener('click', (e) => {
@@ -321,8 +337,9 @@ const jsonLD = {
     });
   </script>
 
-  <!-- Critical resource hints -->
-  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <!-- Critical resource hints - Already in Layout.astro, removing duplicates -->
+  <!-- Additional resource hints for API endpoints -->
   <link rel="dns-prefetch" href="//www.google-analytics.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://api-merchant.payos.vn" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 </Layout>

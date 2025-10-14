@@ -32,6 +32,7 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = React.useState<FormStep>(1);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [userClickedSubmit, setUserClickedSubmit] = React.useState(false);
 
   const [formData, setFormData] = React.useState<RegistrationFormData>({
     packageId: packageInfo.id,
@@ -162,21 +163,27 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
   };
 
   const handleNext = () => {
+    console.log('handleNext called, currentStep:', currentStep);
     if (currentStep === 2 && !validateStep2()) return;
     if (currentStep === 3 && !validateStep3()) return;
     if (currentStep < 4) {
       setCurrentStep((prev) => (prev + 1) as FormStep);
+      setUserClickedSubmit(false); // Reset flag khi chuyển step
     }
+    // Không tự động submit khi đến step 4, người dùng phải bấm nút "Thanh toán"
   };
 
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep((prev) => (prev - 1) as FormStep);
+      setUserClickedSubmit(false); // Reset flag khi quay lại
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    console.log('handleSubmit called, currentStep:', currentStep);
 
     if (!validateStep2() || !validateStep3()) {
       toast({
@@ -187,6 +194,7 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
       return;
     }
 
+    console.log('Setting isSubmitting to true');
     setIsSubmitting(true);
 
     try {
@@ -287,8 +295,27 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
     }
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submit event triggered, currentStep:', currentStep, 'userClickedSubmit:', userClickedSubmit);
+    
+    // Chỉ cho phép submit khi ở step 4 và người dùng bấm nút "Thanh toán"
+    if (currentStep !== 4) {
+      console.log('Form submit blocked - not on step 4');
+      return;
+    }
+    
+    // Kiểm tra xem có phải người dùng bấm nút "Thanh toán" không
+    if (!userClickedSubmit) {
+      console.log('Form submit blocked - user did not click submit button');
+      return;
+    }
+    
+    handleSubmit(e);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto">
+    <form onSubmit={handleFormSubmit} className="w-full max-w-4xl mx-auto">
       {/* Step Indicator */}
       <StepIndicator steps={FORM_STEPS} currentStep={currentStep} />
 
@@ -478,42 +505,10 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
           </div>
         )}
 
-        {/* Step 4: Additional Information & Confirmation */}
+        {/* Step 4: Confirmation with Edit Functionality */}
         {currentStep === 4 && (
           <div className="space-y-4 sm:space-y-6 animate-in fade-in slide-in-from-right duration-300">
-            <Card>
-              <CardHeader className="pb-3 sm:pb-6">
-                <CardTitle className="text-lg sm:text-xl md:text-2xl">Thông tin bổ sung</CardTitle>
-                <CardDescription className="text-xs sm:text-sm">
-                  Những thông tin này sẽ giúp chúng tôi tư vấn tốt hơn cho bạn
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="address">Địa chỉ (tùy chọn)</Label>
-                  <Input
-                    id="address"
-                    placeholder="Hà Nội"
-                    value={formData.address}
-                    onChange={(e) => updateFormData('address', e.target.value)}
-                    className="text-base"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="specialQuestion">Câu hỏi đặc biệt (tùy chọn)</Label>
-                  <textarea
-                    id="specialQuestion"
-                    className="w-full min-h-[100px] sm:min-h-[120px] px-3 py-2 text-sm sm:text-base border border-input bg-background rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-y"
-                    placeholder="Nếu bạn có câu hỏi hoặc nhu cầu tư vấn đặc biệt, hãy cho chúng tôi biết..."
-                    value={formData.specialQuestion}
-                    onChange={(e) => updateFormData('specialQuestion', e.target.value)}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Confirmation Summary */}
+            {/* Confirmation Summary with Edit Buttons */}
             <Card className="border-2 border-primary/20">
               <CardHeader className="pb-3 sm:pb-6">
                 <CardTitle className="text-lg sm:text-xl md:text-2xl">Xác nhận thông tin</CardTitle>
@@ -521,31 +516,102 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground text-xs sm:text-sm">Họ tên:</span>
-                    <p className="font-medium text-sm sm:text-base break-words">{formData.fullName}</p>
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <span className="text-muted-foreground text-xs sm:text-sm">Họ tên:</span>
+                      <p className="font-medium text-sm sm:text-base break-words">{formData.fullName}</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentStep(2)}
+                      className="text-xs px-2 py-1 h-auto"
+                    >
+                      Sửa
+                    </Button>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground text-xs sm:text-sm">Số điện thoại:</span>
-                    <p className="font-medium text-sm sm:text-base">{formData.phone}</p>
+                  
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <span className="text-muted-foreground text-xs sm:text-sm">Số điện thoại:</span>
+                      <p className="font-medium text-sm sm:text-base">{formData.phone}</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentStep(2)}
+                      className="text-xs px-2 py-1 h-auto"
+                    >
+                      Sửa
+                    </Button>
                   </div>
-                  <div className="sm:col-span-2">
-                    <span className="text-muted-foreground text-xs sm:text-sm">Email:</span>
-                    <p className="font-medium text-sm sm:text-base break-all">{formData.email}</p>
+                  
+                  <div className="sm:col-span-2 flex justify-between items-start">
+                    <div className="flex-1">
+                      <span className="text-muted-foreground text-xs sm:text-sm">Email:</span>
+                      <p className="font-medium text-sm sm:text-base break-all">{formData.email}</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentStep(2)}
+                      className="text-xs px-2 py-1 h-auto"
+                    >
+                      Sửa
+                    </Button>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground text-xs sm:text-sm">Ngày sinh:</span>
-                    <p className="font-medium text-sm sm:text-base">
-                      {formData.birthDay}/{formData.birthMonth}/{formData.birthYear}
-                    </p>
+                  
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <span className="text-muted-foreground text-xs sm:text-sm">Ngày sinh:</span>
+                      <p className="font-medium text-sm sm:text-base">
+                        {formData.birthDay}/{formData.birthMonth}/{formData.birthYear}
+                      </p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentStep(3)}
+                      className="text-xs px-2 py-1 h-auto"
+                    >
+                      Sửa
+                    </Button>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground text-xs sm:text-sm">Giờ sinh:</span>
-                    <p className="font-medium text-sm sm:text-base">{formData.birthHour}</p>
+                  
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <span className="text-muted-foreground text-xs sm:text-sm">Giờ sinh:</span>
+                      <p className="font-medium text-sm sm:text-base">{formData.birthHour}</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentStep(3)}
+                      className="text-xs px-2 py-1 h-auto"
+                    >
+                      Sửa
+                    </Button>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground text-xs sm:text-sm">Giới tính:</span>
-                    <p className="font-medium text-sm sm:text-base">{formData.gender}</p>
+                  
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <span className="text-muted-foreground text-xs sm:text-sm">Giới tính:</span>
+                      <p className="font-medium text-sm sm:text-base">{formData.gender}</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentStep(3)}
+                      className="text-xs px-2 py-1 h-auto"
+                    >
+                      Sửa
+                    </Button>
                   </div>
                 </div>
 
@@ -577,7 +643,15 @@ export function RegistrationForm({ packageInfo }: RegistrationFormProps) {
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         ) : (
-          <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto min-w-[120px]">
+          <Button 
+            type="submit" 
+            disabled={isSubmitting} 
+            onClick={() => {
+              console.log('Thanh toán button clicked');
+              setUserClickedSubmit(true);
+            }}
+            className="w-full sm:w-auto min-w-[120px]"
+          >
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />

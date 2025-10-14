@@ -41,12 +41,12 @@ console.log('Pricing component - packages loaded:', packages.length);
     <!-- Section header -->
     <ScrollReveal animation="fade-up" class="text-center mb-8 sm:mb-12 md:mb-16 space-y-3 sm:space-y-4">
       <div class="inline-block">
-        <span class="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wider">Bảng giá</span>
+        <span class="text-sm sm:text-base font-semibold text-primary uppercase tracking-wider">Bảng giá</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent px-4">
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent px-4">
         Gói Dịch Vụ Tử Vi
       </h2>
-      <p class="text-sm sm:text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
+      <p class="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
         Khám phá vận mệnh của bạn với các gói dịch vụ tử vi chuyên nghiệp, được thiết kế riêng cho từng nhu cầu.
       </p>
     </ScrollReveal>
@@ -57,7 +57,7 @@ console.log('Pricing component - packages loaded:', packages.length);
         packages.map((pkg, index) => (
           <ScrollReveal animation="fade-up" delay={index * 100}>
             <PricingCard
-              client:load
+              client:visible
               id={pkg.id}
               name={pkg.name}
               description={pkg.description}
@@ -77,16 +77,16 @@ console.log('Pricing component - packages loaded:', packages.length);
       <div class="bg-card border border-border rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 shadow-lg">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
           <div class="space-y-1 sm:space-y-2">
-            <div class="text-2xl sm:text-3xl font-bold text-primary">24h</div>
-            <div class="text-xs sm:text-sm text-muted-foreground">Giao báo cáo PDF nhanh chóng</div>
+            <div class="text-3xl sm:text-4xl font-bold text-primary">24h</div>
+            <div class="text-sm sm:text-base text-muted-foreground">Giao báo cáo nhanh chóng</div>
           </div>
           <div class="space-y-1 sm:space-y-2">
-            <div class="text-2xl sm:text-3xl font-bold text-primary">95%</div>
-            <div class="text-xs sm:text-sm text-muted-foreground">Độ chính xác cao</div>
+            <div class="text-3xl sm:text-4xl font-bold text-primary">95%</div>
+            <div class="text-sm sm:text-base text-muted-foreground">Độ chính xác cao</div>
           </div>
           <div class="space-y-1 sm:space-y-2">
-            <div class="text-2xl sm:text-3xl font-bold text-primary">10,000+</div>
-            <div class="text-xs sm:text-sm text-muted-foreground">Khách hàng tin tưởng</div>
+            <div class="text-3xl sm:text-4xl font-bold text-primary">10,000+</div>
+            <div class="text-sm sm:text-base text-muted-foreground">Khách hàng tin tưởng</div>
           </div>
         </div>
       </div>
@@ -94,16 +94,16 @@ console.log('Pricing component - packages loaded:', packages.length);
 
     <!-- Footer disclaimer -->
     <ScrollReveal animation="fade-up" class="text-center space-y-3 sm:space-y-4 px-4">
-      <p class="text-muted-foreground text-xs sm:text-sm">
+      <p class="text-muted-foreground text-sm sm:text-base">
         Tất cả giá đều tính bằng VND. Giá có thể thay đổi tùy theo thời điểm.
       </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base text-muted-foreground">
         <span class="flex items-center gap-1.5 sm:gap-2">
           ✨ Thanh toán an toàn qua PayOS
         </span>
         <span class="hidden sm:block">•</span>
         <span class="flex items-center gap-1.5 sm:gap-2">
-          📄 Nhận báo cáo PDF trong 24h
+          📄 Nhận báo cáo trong 24h
         </span>
         <span class="hidden sm:block">•</span>
         <span class="flex items-center gap-1.5 sm:gap-2">

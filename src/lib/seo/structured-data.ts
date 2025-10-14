@@ -46,7 +46,7 @@ export function generateServiceSchema(config: StructuredDataConfig, packages: Pa
     '@type': 'Service',
     '@id': `${config.siteUrl}/#service`,
     name: 'Luận giải Tử Vi chuyên nghiệp',
-    description: 'Dịch vụ luận giải tử vi, bát tự chuyên nghiệp với độ chính xác cao, giao PDF trong 24 giờ',
+    description: 'Dịch vụ luận giải tử vi, bát tự chuyên nghiệp với độ chính xác cao, giao báo cáo trong 24 giờ',
     provider: {
       '@id': `${config.siteUrl}/#organization`,
     },

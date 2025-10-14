@@ -1,6 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Performance: Font loading optimization */
+@layer base {
+  @font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+  }
+  
+  /* Modern font stack with better typography */
+  body {
+    font-family: 'Inter', 'Poppins', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variant-ligatures: common-ligatures;
+  }
+  
+  /* Header typography */
+  .header-logo {
+    font-family: 'Space Grotesk', 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-rendering: optimizeLegibility;
+    position: relative;
+  }
+  
+  .header-logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    transition: width 0.3s ease;
+  }
+  
+  .header-logo:hover::after {
+    width: 100%;
+  }
+  
+  .nav-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .nav-link:hover::before {
+    left: 100%;
+  }
+  
+  /* Typography enhancements */
+  .text-gradient {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+}
 
 @layer utilities {
   .bg-page {
@@ -19,15 +100,18 @@
     color: var(--aw-color-text-muted);
   }
   
-  /* Scroll animation utilities */
+  /* Scroll animation utilities with GPU acceleration */
   .scroll-reveal {
     opacity: 0;
     transition-property: opacity, transform;
-    transition-timing-function: ease-out;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
   
   .scroll-reveal.is-visible {
     opacity: 1;
+    will-change: auto;
   }
   
   /* Animation delays */
@@ -199,26 +283,26 @@
   }
 }
 
-/* Custom animations for OrderForm */
+/* Custom animations for OrderForm - GPU optimized */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes slide-in {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translate3d(-20px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -226,22 +310,22 @@
   0%,
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
   }
   50% {
     opacity: 0.9;
-    transform: scale(1.01);
+    transform: scale3d(1.01, 1.01, 1);
   }
 }
 
 @keyframes bounce-subtle {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
   50% {
-    transform: translateY(-2px);
+    transform: translate3d(0, -2px, 0);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }

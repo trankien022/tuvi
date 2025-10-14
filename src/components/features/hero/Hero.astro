@@ -8,7 +8,6 @@ import { ScrollReveal } from '@common';
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
   <!-- Animated gradient background -->
@@ -33,17 +32,19 @@ import { ScrollReveal } from '@common';
     <div class="text-center">
       <!-- Badge -->
       <ScrollReveal animation="fade-down">
-        <div class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20 mb-6 sm:mb-8" style="font-family: 'Inter', sans-serif;">
-          <Icon name="tabler:sparkles" class="w-3 sm:w-4 h-3 sm:h-4 mr-1.5 sm:mr-2 text-yellow-300" />
-          <span class="text-xs sm:text-sm font-semibold tracking-wide">Luận Giải Tử Vi Chuyên Nghiệp</span>
+        <div class="hero-badge inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20 mb-8 sm:mb-10 hover:bg-white/15 transition-all duration-300">
+          <Icon name="tabler:sparkles" class="w-4 sm:w-5 h-4 sm:h-5 mr-2 sm:mr-3 text-yellow-300" />
+          <span class="text-base sm:text-lg font-bold tracking-wide">Luận Giải Tử Vi Chuyên Nghiệp</span>
         </div>
       </ScrollReveal>
 
       <!-- Main heading -->
       <ScrollReveal animation="fade-up" delay={100}>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-4 sm:mb-6 leading-tight px-2" style="font-family: 'Playfair Display', serif; letter-spacing: -0.02em;">
-          Tử Vi Trúc Nghi
-          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300 font-black mt-2">
+        <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white mb-6 sm:mb-8 leading-[0.9] px-2">
+          <span class="block hero-main-text">
+            Tử Vi Trúc Nghi
+          </span>
+          <span class="block hero-subtitle text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mt-2 sm:mt-4">
             Biết Vận Hạn, Nắm Cơ Hội
           </span>
         </h1>
@@ -51,28 +52,30 @@ import { ScrollReveal } from '@common';
 
       <!-- Description -->
       <ScrollReveal animation="fade-up" delay={200}>
-        <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-indigo-200 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed font-medium px-4" style="font-family: 'Inter', sans-serif;">
-          Luận giải Tử Vi/Bát Tự chi tiết, chính xác. Nhận PDF trong 24 giờ. 
-          Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe toàn diện.
+        <p class="hero-description text-xl sm:text-2xl md:text-3xl lg:text-4xl text-indigo-100 mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed font-medium px-4">
+          Luận giải Tử Vi/Bát Tự chi tiết, chính xác. 
+          <span class="block mt-2 text-yellow-200 font-semibold">
+            Tư vấn tài lộc, quan lộc, tình cảm, sức khỏe toàn diện.
+          </span>
         </p>
       </ScrollReveal>
 
       <!-- CTA Buttons -->
       <ScrollReveal animation="scale-up" delay={300}>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4" style="font-family: 'Inter', sans-serif;">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 sm:mb-14 px-4">
           <a
             href="#pricing"
-            class="w-full sm:w-auto group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold text-base sm:text-lg rounded-xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-500/50"
+            class="hero-cta-primary w-full sm:w-auto group inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold text-xl sm:text-2xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-500/50"
           >
-            <Icon name="tabler:stars" class="w-4 sm:w-5 h-4 sm:h-5 mr-2 group-hover:rotate-12 transition-transform" />
+            <Icon name="tabler:stars" class="w-5 sm:w-6 h-5 sm:h-6 mr-3 group-hover:rotate-12 transition-transform" />
             Xem Gói Dịch Vụ
-            <Icon name="tabler:arrow-right" class="w-4 sm:w-5 h-4 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            <Icon name="tabler:arrow-right" class="w-5 sm:w-6 h-5 sm:h-6 ml-3 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="#about"
-            class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-sm text-white font-semibold text-base sm:text-lg rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300"
+            class="hero-cta-secondary w-full sm:w-auto inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 bg-white/10 backdrop-blur-sm text-white font-semibold text-xl sm:text-2xl rounded-2xl border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
           >
-            <Icon name="tabler:info-circle" class="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+            <Icon name="tabler:info-circle" class="w-5 sm:w-6 h-5 sm:h-6 mr-3" />
             Tìm Hiểu Thêm
           </a>
         </div>
@@ -80,22 +83,22 @@ import { ScrollReveal } from '@common';
 
       <!-- Features/Stats -->
       <ScrollReveal animation="fade-up" delay={400}>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-4xl mx-auto px-4" style="font-family: 'Inter', sans-serif;">
-          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
-            <div class="text-2xl sm:text-3xl font-extrabold text-yellow-300 mb-1 sm:mb-2 tabular-nums">10,000+</div>
-            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Khách hàng</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto px-4">
+          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-yellow-300 mb-2 tabular-nums">10,000+</div>
+            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Khách hàng</div>
           </div>
-          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
-            <div class="text-2xl sm:text-3xl font-extrabold text-green-300 mb-1 sm:mb-2 tabular-nums">4.9/5</div>
-            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Đánh giá</div>
+          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-green-300 mb-2 tabular-nums">4.9/5</div>
+            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Đánh giá</div>
           </div>
-          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
-            <div class="text-2xl sm:text-3xl font-extrabold text-blue-300 mb-1 sm:mb-2 tabular-nums">95%</div>
-            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Độ chính xác</div>
+          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-blue-300 mb-2 tabular-nums">95%</div>
+            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Độ chính xác</div>
           </div>
-          <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20">
-            <div class="text-2xl sm:text-3xl font-extrabold text-pink-300 mb-1 sm:mb-2 tabular-nums">24h</div>
-            <div class="text-xs sm:text-sm text-indigo-200 font-medium">Giao PDF</div>
+          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-pink-300 mb-2 tabular-nums">24h</div>
+            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Giao nhanh</div>
           </div>
         </div>
       </ScrollReveal>
@@ -148,12 +151,102 @@ import { ScrollReveal } from '@common';
     transition: opacity 0.3s ease-out;
   }
 
+  /* Hero Typography Styles */
+  .hero-badge {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .hero-title {
+    font-family: 'Space Grotesk', 'Poppins', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .hero-main-text {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  }
+  
+  .hero-subtitle {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
+  }
+  
+  .hero-description {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .hero-cta-primary {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+  }
+  
+  .hero-cta-secondary {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+  }
+  
+  .hero-stat-card {
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hero-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hero-stat-number {
+    font-family: 'Space Grotesk', 'Poppins', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-rendering: optimizeLegibility;
+  }
+  
+  .hero-stat-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-rendering: optimizeLegibility;
+  }
+
   /* Optimize Vietnamese text rendering */
   #hero h1, #hero p, #hero span {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1;
+  }
+
+  /* GPU acceleration for animations */
+  #hero .animate-blob {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
   }
 
   /* Ensure proper Vietnamese character display */
@@ -184,23 +277,30 @@ import { ScrollReveal } from '@common';
   }
 </style>
 
-<!-- Scroll effect script -->
+<!-- Scroll effect script with throttle -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const hero = document.getElementById('hero');
     const heroOverlay = document.getElementById('hero-overlay');
+    let ticking = false;
 
-    window.addEventListener('scroll', function () {
+    const updateOverlay = () => {
       const scrollTop = window.pageYOffset;
       const windowHeight = window.innerHeight;
-
-      // Calculate overlay opacity based on scroll position
       const overlayOpacity = Math.min(0.5, scrollTop / windowHeight);
 
       if (heroOverlay) {
         heroOverlay.style.opacity = overlayOpacity.toString();
       }
-    });
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateOverlay);
+        ticking = true;
+      }
+    }, { passive: true });
   });
 </script>
 

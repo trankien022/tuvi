@@ -130,7 +130,7 @@ const metadata = {
       </div>
 
       <!-- Registration Form -->
-      <RegistrationForm client:load packageInfo={packageInfo} />
+      <RegistrationForm client:idle packageInfo={packageInfo} />
 
       <!-- Trust Indicators -->
       <div class="mt-8 sm:mt-12 md:mt-16 max-w-4xl mx-auto">
@@ -156,7 +156,7 @@ const metadata = {
                 clip-rule="evenodd"></path>
             </svg>
             <div>
-              <div class="text-xs sm:text-sm font-medium">Nhận PDF trong 24-48h</div>
+              <div class="text-xs sm:text-sm font-medium">Nhận báo cáo trong 24-48h</div>
               <div class="text-[10px] sm:text-xs text-muted-foreground">Giao hàng nhanh</div>
             </div>
           </div>
@@ -179,7 +179,7 @@ const metadata = {
   </main>
 
   <!-- Toaster for notifications -->
-  <Toaster client:load />
+  <Toaster client:idle />
 
   <!-- Schema.org structured data -->
   <script type="application/ld+json" set:html={JSON.stringify({

@@ -67,42 +67,44 @@ export default {
   			fade: 'fadeInUp 1s both',
   			marquee: 'marquee var(--duration) linear infinite',
   			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
-  			'fade-in': 'fadeIn 0.6s ease-out forwards',
-  			'fade-up': 'fadeUp 0.6s ease-out forwards',
-  			'fade-down': 'fadeDown 0.6s ease-out forwards',
-  			'fade-left': 'fadeLeft 0.6s ease-out forwards',
-  			'fade-right': 'fadeRight 0.6s ease-out forwards',
-  			'scale-up': 'scaleUp 0.6s ease-out forwards',
-  			'slide-up': 'slideUp 0.6s ease-out forwards',
-  			'zoom-in': 'zoomIn 0.5s ease-out forwards',
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'fade-in': 'fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'fade-up': 'fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'fade-down': 'fadeDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'fade-left': 'fadeLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'fade-right': 'fadeRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'scale-up': 'scaleUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'slide-up': 'slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'zoom-in': 'zoomIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+  			'accordion-down': 'accordion-down 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+  			'accordion-up': 'accordion-up 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
   		},
   		keyframes: {
   			fadeInUp: {
   				'0%': {
   					opacity: 0,
-  					transform: 'translateY(2rem)'
+  					transform: 'translate3d(0, 2rem, 0)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: 1,
-  					transform: 'translateY(0)'
+  					transform: 'translate3d(0, 0, 0)',
+  					willChange: 'auto'
   				}
   			},
   			marquee: {
   				from: {
-  					transform: 'translateX(0)'
+  					transform: 'translate3d(0, 0, 0)'
   				},
   				to: {
-  					transform: 'translateX(calc(-100% - var(--gap)))'
+  					transform: 'translate3d(calc(-100% - var(--gap)), 0, 0)'
   				}
   			},
   			'marquee-vertical': {
   				from: {
-  					transform: 'translateY(0)'
+  					transform: 'translate3d(0, 0, 0)'
   				},
   				to: {
-  					transform: 'translateY(calc(-100% - var(--gap)))'
+  					transform: 'translate3d(0, calc(-100% - var(--gap)), 0)'
   				}
   			},
   			fadeIn: {
@@ -116,71 +118,85 @@ export default {
   			fadeUp: {
   				'0%': {
   					opacity: '0',
-  					transform: 'translateY(30px)'
+  					transform: 'translate3d(0, 30px, 0)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'translateY(0)'
+  					transform: 'translate3d(0, 0, 0)',
+  					willChange: 'auto'
   				}
   			},
   			fadeDown: {
   				'0%': {
   					opacity: '0',
-  					transform: 'translateY(-30px)'
+  					transform: 'translate3d(0, -30px, 0)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'translateY(0)'
+  					transform: 'translate3d(0, 0, 0)',
+  					willChange: 'auto'
   				}
   			},
   			fadeLeft: {
   				'0%': {
   					opacity: '0',
-  					transform: 'translateX(-30px)'
+  					transform: 'translate3d(-30px, 0, 0)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'translateX(0)'
+  					transform: 'translate3d(0, 0, 0)',
+  					willChange: 'auto'
   				}
   			},
   			fadeRight: {
   				'0%': {
   					opacity: '0',
-  					transform: 'translateX(30px)'
+  					transform: 'translate3d(30px, 0, 0)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'translateX(0)'
+  					transform: 'translate3d(0, 0, 0)',
+  					willChange: 'auto'
   				}
   			},
   			scaleUp: {
   				'0%': {
   					opacity: '0',
-  					transform: 'scale(0.9)'
+  					transform: 'scale3d(0.9, 0.9, 1)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'scale(1)'
+  					transform: 'scale3d(1, 1, 1)',
+  					willChange: 'auto'
   				}
   			},
   			slideUp: {
   				'0%': {
   					opacity: '0',
-  					transform: 'translateY(50px)'
+  					transform: 'translate3d(0, 50px, 0)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'translateY(0)'
+  					transform: 'translate3d(0, 0, 0)',
+  					willChange: 'auto'
   				}
   			},
   			zoomIn: {
   				'0%': {
   					opacity: '0',
-  					transform: 'scale(0.8)'
+  					transform: 'scale3d(0.8, 0.8, 1)',
+  					willChange: 'transform, opacity'
   				},
   				'100%': {
   					opacity: '1',
-  					transform: 'scale(1)'
+  					transform: 'scale3d(1, 1, 1)',
+  					willChange: 'auto'
   				}
   			},
   			'accordion-down': {

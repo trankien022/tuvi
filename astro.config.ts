@@ -32,6 +32,11 @@ export default defineConfig({
     functionPerRoute: false,
   }),
 
+  prefetch: {
+    defaultStrategy: 'viewport',
+    prefetchAll: true,
+  },
+
   integrations: [
     react(),
     tailwind({
@@ -63,21 +68,43 @@ export default defineConfig({
     ),
 
     compress({
-      CSS: true,
+      CSS: {
+        csso: {
+          restructure: true,
+          forceMediaMerge: true,
+        },
+      },
       HTML: {
         'html-minifier-terser': {
           removeAttributeQuotes: false,
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
         },
       },
-      Image: false,
-      JavaScript: true,
-      SVG: false,
+      Image: true,
+      JavaScript: {
+        terser: {
+          compress: {
+            drop_console: process.env.NODE_ENV === 'production',
+            passes: 2,
+          },
+        },
+      },
+      SVG: true,
       Logger: 1,
     }),
   ],
 
   image: {
     domains: ['cdn.pixabay.com'],
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+      },
+    },
   },
 
   markdown: {
@@ -86,6 +113,24 @@ export default defineConfig({
   },
 
   vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'radix-ui': [
+              '@radix-ui/react-accordion',
+              '@radix-ui/react-dialog',
+              '@radix-ui/react-label',
+              '@radix-ui/react-radio-group',
+              '@radix-ui/react-select',
+              '@radix-ui/react-slot',
+              '@radix-ui/react-toast',
+            ],
+          },
+        },
+      },
+    },
     resolve: {
       alias: {
         // Core aliases

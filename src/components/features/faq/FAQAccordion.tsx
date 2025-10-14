@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -67,7 +68,7 @@ const faqData: FAQItem[] = [
       '• Tình cảm, hôn nhân, gia đạo',
       '• Sức khỏe và những điều cần lưu ý',
       '• Lời khuyên và hướng dẫn cụ thể cho từng giai đoạn',
-      'Tất cả được trình bày dưới dạng file PDF dễ đọc, dễ lưu trữ.',
+      'Tất cả được trình bày dưới dạng báo cáo dễ đọc, dễ lưu trữ.',
     ],
   },
   {
@@ -123,7 +124,7 @@ const faqData: FAQItem[] = [
   },
 ];
 
-export default function FAQAccordion() {
+const FAQAccordion = React.memo(function FAQAccordion() {
   return (
     <Accordion
       type="single"
@@ -146,7 +147,7 @@ export default function FAQAccordion() {
                     <Icon className="w-5 h-5 text-white" />
                   </div>
                 </div>
-                <span className="text-base md:text-lg font-semibold text-slate-900 dark:text-slate-100 pr-4">
+                <span className="text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-100 pr-4">
                   {faq.question}
                 </span>
               </div>
@@ -154,7 +155,7 @@ export default function FAQAccordion() {
             <AccordionContent className="px-6 pb-6">
               <div className="ml-14 space-y-3 text-slate-600 dark:text-slate-400">
                 {faq.answer.map((paragraph, idx) => (
-                  <p key={idx} className="leading-relaxed text-sm md:text-base">
+                  <p key={idx} className="leading-relaxed text-base md:text-lg">
                     {paragraph}
                   </p>
                 ))}
@@ -165,4 +166,6 @@ export default function FAQAccordion() {
       })}
     </Accordion>
   );
-}
+});
+
+export default FAQAccordion;

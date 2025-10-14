@@ -2,105 +2,139 @@
 import { Icon } from 'astro-icon/components';
 import Marquee from '~/components/magicui/marquee.tsx';
 import { ScrollReveal } from '@common';
+import { Badge } from '~/components/ui/badge';
 ---
 
-<section class="py-12 bg-gray-50 border-t border-b border-gray-200">
+<section class="py-16 bg-gradient-to-br from-gray-50 via-white to-gray-50 border-t border-b border-gray-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <ScrollReveal animation="fade-down">
-      <div class="text-center mb-8">
-        <p class="text-gray-600 text-sm font-medium">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
           Được tin tưởng bởi khách hàng từ các tập đoàn và ngân hàng hàng đầu Việt Nam
-        </p>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
       </div>
     </ScrollReveal>
 
     <!-- Company logos -->
     <div class="relative flex w-full items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover={true} className="[--duration:35s]" client:load>
+      <Marquee pauseOnHover={true} className="[--duration:35s]" client:visible>
         <!-- BIDV -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/bidv.png"
+            src="/logo/BIDV Logo.jpg"
             alt="BIDV"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- Vietcombank -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/vietcombank.png"
+            src="/logo/Vietcombank.jpg"
             alt="Vietcombank"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- FPT -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/fpt.jpg"
+            src="/logo/FPT Logo.jpg"
             alt="FPT"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- VNG -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/vng.png"
+            src="/logo/VNG.jpg"
             alt="VNG"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- Grab -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/grab.jpg"
+            src="/logo/Grab Logo.jpg"
             alt="Grab"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- Shopee -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/shopee.jpg"
+            src="/logo/Shoppe.jpg"
             alt="Shopee"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- Tiki -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/tiki.jpg"
+            src="/logo/Tiki Logo.jpg"
             alt="Tiki"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
 
         <!-- Techcombank -->
         <div
-          class="flex items-center justify-center px-6 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-110 mx-2"
+          class="flex items-center justify-center hover:scale-110 transition-all duration-300 mx-6"
         >
           <img
-            src="/logo/teach.jpg"
+            src="/logo/TeachCombank.jpg"
             alt="Techcombank"
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="48"
             class="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity filter brightness-110"
           />
         </div>
@@ -110,77 +144,46 @@ import { ScrollReveal } from '@common';
       <div class="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-gray-50"></div>
     </div>
 
-    <!-- Additional trust indicators -->
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Security -->
-      <ScrollReveal animation="fade-up" delay={0}>
-      <div class="text-center">
-        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Icon name="tabler:shield-check" class="w-6 h-6 text-green-600" />
-        </div>
-        <h3 class="font-semibold text-gray-900 mb-2">Bảo Mật Tuyệt Đối</h3>
-        <p class="text-gray-600 text-sm">Thông tin cá nhân được mã hóa và bảo vệ theo tiêu chuẩn quốc tế</p>
-      </div>
-      </ScrollReveal>
-
-      <!-- Experience -->
-      <ScrollReveal animation="fade-up" delay={100}>
-      <div class="text-center">
-        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Icon name="tabler:award" class="w-6 h-6 text-purple-600" />
-        </div>
-        <h3 class="font-semibold text-gray-900 mb-2">15+ Năm Kinh Nghiệm</h3>
-        <p class="text-gray-600 text-sm">Thầy có bằng cấp chuyên môn và kinh nghiệm luận giải lâu năm</p>
-      </div>
-      </ScrollReveal>
-
-      <!-- Support -->
-      <ScrollReveal animation="fade-up" delay={200}>
-      <div class="text-center">
-        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Icon name="tabler:headset" class="w-6 h-6 text-blue-600" />
-        </div>
-        <h3 class="font-semibold text-gray-900 mb-2">Hỗ Trợ 24/7</h3>
-        <p class="text-gray-600 text-sm">Đội ngũ tư vấn sẵn sàng hỗ trợ qua Zalo, Telegram mọi lúc</p>
-      </div>
-      </ScrollReveal>
-    </div>
 
     <!-- Certifications -->
     <ScrollReveal animation="fade-in">
-    <div class="mt-12 pt-8 border-t border-gray-200">
-      <div class="flex flex-wrap justify-center items-center space-x-8 text-gray-500">
-        <div class="flex items-center space-x-2">
-          <Icon name="tabler:certificate" class="w-5 h-5" />
-          <span class="text-sm">Chứng chỉ Phong Thủy</span>
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <div class="text-center mb-6">
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">Chứng Chỉ & Thành Tích</h3>
+          <p class="text-base sm:text-lg text-gray-600">Được công nhận bởi các tổ chức uy tín</p>
         </div>
-        <div class="flex items-center space-x-2">
-          <Icon name="tabler:school" class="w-5 h-5" />
-          <span class="text-sm">Học viện Dịch học</span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <Icon name="tabler:users" class="w-5 h-5" />
-          <span class="text-sm">Hội Phong Thủy VN</span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <Icon name="tabler:star" class="w-5 h-5" />
-          <span class="text-sm">Top 10 Thầy Tử Vi</span>
+        <div class="flex flex-wrap justify-center items-center gap-3">
+          <Badge variant="secondary" class="px-4 py-2 text-base font-medium bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-green-200 hover:bg-gradient-to-r hover:from-green-100 hover:to-green-200 transition-all duration-200">
+            <Icon name="tabler:certificate" class="w-4 h-4 mr-2" />
+            Chứng chỉ Phong Thủy
+          </Badge>
+          <Badge variant="secondary" class="px-4 py-2 text-sm font-medium bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-blue-200 hover:bg-gradient-to-r hover:from-blue-100 hover:to-blue-200 transition-all duration-200">
+            <Icon name="tabler:school" class="w-4 h-4 mr-2" />
+            Học viện Dịch học
+          </Badge>
+          <Badge variant="secondary" class="px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 border-purple-200 hover:bg-gradient-to-r hover:from-purple-100 hover:to-purple-200 transition-all duration-200">
+            <Icon name="tabler:users" class="w-4 h-4 mr-2" />
+            Hội Phong Thủy VN
+          </Badge>
+          <Badge variant="secondary" class="px-4 py-2 text-sm font-medium bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 border-amber-200 hover:bg-gradient-to-r hover:from-amber-100 hover:to-amber-200 transition-all duration-200">
+            <Icon name="tabler:star" class="w-4 h-4 mr-2" />
+            Top 10 Thầy Tử Vi
+          </Badge>
         </div>
       </div>
-    </div>
     </ScrollReveal>
   </div>
 </section>
 
 <style>
-  /* Subtle animation for logos */
+  /* Subtle animation for logos - GPU optimized */
   @keyframes subtle-float {
     0%,
     100% {
-      transform: translateY(0px);
+      transform: translate3d(0, 0, 0);
     }
     50% {
-      transform: translateY(-2px);
+      transform: translate3d(0, -2px, 0);
     }
   }
 

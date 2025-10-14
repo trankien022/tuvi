@@ -16,7 +16,7 @@ interface PricingCardProps {
   isPopular?: boolean;
 }
 
-export function PricingCard({
+export const PricingCard = React.memo(function PricingCard({
   id,
   name,
   description,
@@ -41,7 +41,7 @@ export function PricingCard({
       {/* Featured badge */}
       {isHighlighted && (
         <div className="absolute top-0 right-0 -translate-y-1 translate-x-1 z-10">
-          <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-none shadow-lg animate-pulse text-[10px] sm:text-xs px-2 py-0.5 sm:px-3 sm:py-1">
+          <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-none shadow-lg animate-pulse text-xs sm:text-sm px-2 py-0.5 sm:px-3 sm:py-1">
             <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-0.5 sm:mr-1" />
             PHỔ BIẾN NHẤT
           </Badge>
@@ -59,8 +59,8 @@ export function PricingCard({
       <CardHeader className="text-center space-y-2 relative pb-4 sm:pb-6">
         <Badge
           variant={isHighlighted ? 'default' : 'secondary'}
-          className={cn(
-            'w-fit mx-auto text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-3 sm:py-1',
+            className={cn(
+            'w-fit mx-auto text-xs sm:text-sm font-bold px-2 py-0.5 sm:px-3 sm:py-1',
             isHighlighted && 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white'
           )}
         >
@@ -69,16 +69,16 @@ export function PricingCard({
 
         <div className="flex items-center justify-center gap-1.5 sm:gap-2">
           {hasDiscount && originalPrice && (
-            <span className="text-lg sm:text-2xl text-muted-foreground line-through">
+            <span className="text-xl sm:text-3xl text-muted-foreground line-through">
               {(originalPrice / 1000).toFixed(0)}k
             </span>
           )}
-          <CardTitle className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text">
+          <CardTitle className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text">
             {(price / 1000).toFixed(0)}k
           </CardTitle>
         </div>
 
-        <CardDescription className="text-xs sm:text-sm min-h-[32px] sm:min-h-[40px] px-2">{description}</CardDescription>
+        <CardDescription className="text-sm sm:text-base min-h-[32px] sm:min-h-[40px] px-2">{description}</CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-3 sm:space-y-4 flex-1 pb-4 sm:pb-6">
@@ -98,7 +98,7 @@ export function PricingCard({
                   )}
                 />
               </div>
-              <span className="text-xs sm:text-sm text-muted-foreground flex-1 leading-relaxed">{feature}</span>
+              <span className="text-sm sm:text-base text-muted-foreground flex-1 leading-relaxed">{feature}</span>
             </div>
           ))}
         </div>
@@ -115,7 +115,7 @@ export function PricingCard({
             }
           }}
           className={cn(
-            'w-full font-semibold transition-all duration-300 group-hover:scale-105 text-sm sm:text-base h-10 sm:h-11',
+            'w-full font-semibold transition-all duration-300 group-hover:scale-105 text-base sm:text-lg h-10 sm:h-11',
             isHighlighted
               ? 'bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl hover:shadow-yellow-500/50'
               : 'hover:shadow-lg'
@@ -128,5 +128,5 @@ export function PricingCard({
       </CardFooter>
     </Card>
   );
-}
+});
 

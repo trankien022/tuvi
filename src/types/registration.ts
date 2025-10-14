@@ -55,6 +55,60 @@ export interface GoogleSheetsResponse {
   timestamp?: string;
 }
 
+export interface PaymentStatusCheckRequest {
+  orderCode: string;
+}
+
+export interface PaymentStatusCheckResponse {
+  success: boolean;
+  orderCode: string;
+  status: 'paid' | 'pending' | 'cancelled' | 'expired';
+  isPaid: boolean;
+  paymentInfo?: {
+    status: string;
+    amount: number;
+    description: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  message?: string;
+  error?: string;
+}
+
+export interface PaymentStatusUpdateRequest {
+  orderCode: string;
+  paymentStatus: string;
+  paymentInfo?: any;
+  registrationData?: any;
+}
+
+export interface PaymentStatusUpdateResponse {
+  success: boolean;
+  message: string;
+  data?: any;
+  error?: string;
+}
+
+export interface PayOSWebhookData {
+  type: string;
+  data: {
+    orderCode: string;
+    status: string;
+    amount?: number;
+    description?: string;
+    createdAt?: string;
+    updatedAt?: string;
+  };
+}
+
+export interface PayOSWebhookResponse {
+  success: boolean;
+  message: string;
+  orderCode?: string;
+  status?: string;
+  error?: string;
+}
+
 export interface PayOSCreatePaymentLinkRequest {
   orderCode: number;
   amount: number;
@@ -107,7 +161,7 @@ export const FORM_STEPS: StepConfig[] = [
   {
     step: 4,
     title: 'Xác nhận',
-    description: 'Kiểm tra và hoàn tất',
+    description: 'Kiểm tra và thanh toán',
   },
 ];
 
