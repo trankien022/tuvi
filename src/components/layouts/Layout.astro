@@ -15,6 +15,7 @@ import ScrollAnimations from '~/components/common/ScrollAnimations.astro';
 
 // Comment the line below to disable View Transitions
 import { ViewTransitions } from 'astro:transitions';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -38,19 +39,16 @@ const { language, textDirection } = I18N;
     <Analytics />
 
     <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://script.google.com" />
     <link rel="dns-prefetch" href="https://api-merchant.payos.vn" />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
-    <!-- Preload critical fonts -->
+    <!-- Load Google Fonts with optimized settings -->
     <link
-      rel="preload"
-      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
     />
 
     <!-- Comment the line below to disable View Transitions -->
@@ -62,5 +60,6 @@ const { language, textDirection } = I18N;
 
     <BasicScripts />
     <ScrollAnimations />
+    <SpeedInsights />
   </body>
 </html>
