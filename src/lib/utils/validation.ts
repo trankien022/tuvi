@@ -3,7 +3,7 @@
  * Helper functions for form validation and data sanitization
  */
 
-import { VALIDATION_CONFIG } from '~/config/constants.ts';
+import { VALIDATION_CONFIG } from '~/config/constants';
 
 // ===========================
 // Phone Number Validation & Formatting

@@ -2,7 +2,7 @@ import slugify from 'limax';
 
 import { SITE, APP_BLOG } from '@config/config';
 
-import { trim } from '@lib/utils/utils.ts';
+import { trim } from '@lib/utils/utils';
 
 export const trimSlash = (s: string) => trim(trim(s, '/'));
 const createPath = (...params: string[]) => {

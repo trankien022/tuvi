@@ -113,6 +113,10 @@ export default defineConfig({
   },
 
   vite: {
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'lucide-react'],
+      exclude: ['@astrojs/react'],
+    },
     build: {
       rollupOptions: {
         output: {

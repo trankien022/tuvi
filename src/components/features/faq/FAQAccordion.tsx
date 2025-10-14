@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@ui/accordion.tsx';
+} from '@ui/accordion';
 import { 
   Sparkles, 
   Info, 

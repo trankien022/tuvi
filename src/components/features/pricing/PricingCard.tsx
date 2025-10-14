@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Check, Sparkles } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card.tsx';
-import { Button } from '~/components/ui/button.tsx';
-import { Badge } from '~/components/ui/badge.tsx';
-import { cn } from '~/lib/utils.ts';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card';
+import { Button } from '~/components/ui/button';
+import { Badge } from '~/components/ui/badge';
+import { cn } from '~/lib/utils';
 
 interface PricingCardProps {
   id: string;

@@ -1,6 +1,11 @@
 import type { APIRoute } from 'astro';
+import { withSecurity } from '~/lib/security/middleware';
 
-export const POST: APIRoute = async ({ request }) => {
+function isProduction(): boolean {
+  const mode = (import.meta as any).env?.MODE || process.env.NODE_ENV;
+  return mode === 'production';
+}
+export const POST: APIRoute = withSecurity(async ({ request }) => {
   try {
     const body = await request.json();
 
@@ -55,12 +60,13 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    console.log('Sending data to Google Sheets:', {
-      ...body,
-      // Don't log sensitive info in production
-      email: '***',
-      phone: '***',
-    });
+    if (!isProduction()) {
+      console.log('Sending data to Google Sheets:', {
+        ...body,
+        email: '***',
+        phone: '***',
+      });
+    }
 
     // Forward the request to Google Sheets
     const response = await fetch(googleSheetsUrl, {
@@ -75,7 +81,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Google Apps Script returns text/html, not application/json
     const textResponse = await response.text();
     
-    console.log('Google Sheets raw response:', textResponse);
+    if (!isProduction()) console.log('Google Sheets raw response:', textResponse);
 
     // Try to parse as JSON
     let result;
@@ -108,7 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   } catch (error) {
-    console.error('Google Sheets API Error:', error);
+    if (!isProduction()) console.error('Google Sheets API Error:', error);
 
     let errorMessage = 'Failed to save registration data';
     if (error instanceof Error) {
@@ -129,5 +135,5 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   }
-};
+});
 

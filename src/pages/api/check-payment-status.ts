@@ -1,6 +1,12 @@
 import type { APIRoute } from 'astro';
+import { withSecurity } from '~/lib/security/middleware';
 
-export const POST: APIRoute = async ({ request }) => {
+function isProduction(): boolean {
+  const mode = (import.meta as any).env?.MODE || process.env.NODE_ENV;
+  return mode === 'production';
+}
+
+export const POST: APIRoute = withSecurity(async ({ request }) => {
   try {
     const body = await request.json();
     const { orderCode } = body;
@@ -44,22 +50,74 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Dynamic import PayOS to avoid SSR constructor issues
     const { PayOS } = await import('@payos/node');
-    const payOS = new (PayOS as any)(clientId, apiKey, checksumKey);
+    const payOS: any = new (PayOS as any)(clientId, apiKey, checksumKey);
 
-    console.log('Checking payment status for orderCode:', orderCode);
+    if (!isProduction()) {
+      console.log('Checking payment status for orderCode:', orderCode);
+    }
 
-    // Get payment information from PayOS
-    // Note: PayOS API might not have a direct get method for payment status
-    // We'll simulate the response for now
+    // Try multiple SDK methods defensively since types may vary by SDK versions
+    const candidates: Array<(code: number | string) => Promise<any>> = [];
+    const requests = payOS?.paymentRequests || payOS?.paymentlinks || payOS?.paymentLinks;
+
+    if (requests) {
+      const methodNames = [
+        'getPaymentRequest',
+        'getPaymentLinkInformation',
+        'getByOrderCode',
+        'get',
+        'retrieve',
+        'find',
+        'status',
+        'getStatus',
+      ];
+
+      for (const name of methodNames) {
+        if (typeof requests[name] === 'function') {
+          candidates.push((code) => requests[name](code));
+          candidates.push((code) => requests[name]({ orderCode: Number(code) }));
+        }
+      }
+    }
+
+    let remote: any | null = null;
+    let lastError: unknown = null;
+    for (const attempt of candidates) {
+      try {
+        remote = await attempt(Number(orderCode));
+        if (remote) break;
+      } catch (err) {
+        lastError = err;
+      }
+    }
+
+    // Fallback: if SDK lookup failed, return a graceful error
+    if (!remote) {
+      throw new Error(
+        'Unable to retrieve payment status from PayOS using available SDK methods'
+      );
+    }
+
+    // Normalize data structure
+    const remoteStatus: string =
+      remote?.status || remote?.data?.status || remote?.paymentStatus || 'PENDING';
+    const amount: number = Number(
+      remote?.amount || remote?.data?.amount || remote?.totalAmount || 0
+    );
+    const description: string =
+      remote?.description || remote?.data?.description || remote?.orderDescription || '';
+    const createdAt: string =
+      remote?.createdAt || remote?.data?.createdAt || remote?.time || new Date().toISOString();
+    const updatedAt: string =
+      remote?.updatedAt || remote?.data?.updatedAt || new Date().toISOString();
+
     const paymentInfo = {
-      status: 'PAID', // This would come from PayOS API
-      amount: 0,
-      description: '',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      status: String(remoteStatus).toUpperCase(),
+      amount,
+      description,
+      createdAt,
+      updatedAt,
     };
-
-    console.log('PayOS payment info:', paymentInfo);
 
     // Determine payment status
     let paymentStatus = 'pending';
@@ -99,7 +157,9 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   } catch (error) {
-    console.error('Payment status check error:', error);
+    if (!isProduction()) {
+      console.error('Payment status check error:', error);
+    }
 
     let errorMessage = 'Failed to check payment status';
     let statusCode = 500;
@@ -129,4 +189,4 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   }
-};
+});
