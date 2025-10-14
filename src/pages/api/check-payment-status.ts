@@ -49,55 +49,68 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('Checking payment status for orderCode:', orderCode);
 
     // Get payment information from PayOS
-    // Note: PayOS API might not have a direct get method for payment status
-    // We'll simulate the response for now
-    const paymentInfo = {
-      status: 'PAID', // This would come from PayOS API
-      amount: 0,
-      description: '',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    console.log('PayOS payment info:', paymentInfo);
-
-    // Determine payment status
-    let paymentStatus = 'pending';
-    let isPaid = false;
-
-    if (paymentInfo.status === 'PAID') {
-      paymentStatus = 'paid';
-      isPaid = true;
-    } else if (paymentInfo.status === 'CANCELLED') {
-      paymentStatus = 'cancelled';
-    } else if (paymentInfo.status === 'EXPIRED') {
-      paymentStatus = 'expired';
-    } else {
-      paymentStatus = 'pending';
-    }
-
-    // Return payment status
-    return new Response(
-      JSON.stringify({
-        success: true,
-        orderCode: orderCode,
-        status: paymentStatus,
-        isPaid: isPaid,
-        paymentInfo: {
-          status: paymentInfo.status,
-          amount: paymentInfo.amount,
-          description: paymentInfo.description,
-          createdAt: paymentInfo.createdAt,
-          updatedAt: paymentInfo.updatedAt,
-        },
-      }),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    try {
+      const paymentInfo = await payOS.getPaymentLinkInformation(Number(orderCode));
+      console.log('PayOS payment info:', paymentInfo);
+      
+      if (!paymentInfo) {
+        throw new Error('Payment not found');
       }
-    );
+
+      // Determine payment status
+      let paymentStatus = 'pending';
+      let isPaid = false;
+
+      if (paymentInfo.status === 'PAID') {
+        paymentStatus = 'paid';
+        isPaid = true;
+      } else if (paymentInfo.status === 'CANCELLED') {
+        paymentStatus = 'cancelled';
+      } else if (paymentInfo.status === 'EXPIRED') {
+        paymentStatus = 'expired';
+      } else {
+        paymentStatus = 'pending';
+      }
+
+      // Return payment status
+      return new Response(
+        JSON.stringify({
+          success: true,
+          orderCode: orderCode,
+          status: paymentStatus,
+          isPaid: isPaid,
+          paymentInfo: {
+            status: paymentInfo.status,
+            amount: paymentInfo.amount || 0,
+            description: paymentInfo.description || '',
+            createdAt: paymentInfo.createdAt || new Date().toISOString(),
+            updatedAt: paymentInfo.updatedAt || new Date().toISOString(),
+          },
+        }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    } catch (payOSError) {
+      // If payment not found in PayOS, return not found status
+      console.error('PayOS API error:', payOSError);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: 'Payment information not found',
+          orderCode: orderCode,
+        }),
+        {
+          status: 404,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
   } catch (error) {
     console.error('Payment status check error:', error);
 

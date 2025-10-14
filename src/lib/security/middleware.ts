@@ -7,6 +7,33 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 // CSRF token store (in production, use secure session storage)
 const csrfTokenStore = new Map<string, { token: string; expires: number }>();
 
+// Cleanup intervals to prevent memory leaks
+const CLEANUP_INTERVAL = 60000; // 1 minute
+
+// Cleanup function to remove expired entries
+function cleanupExpiredEntries() {
+  const now = Date.now();
+  
+  // Cleanup rate limit store
+  for (const [key, value] of rateLimitStore.entries()) {
+    if (now > value.resetTime) {
+      rateLimitStore.delete(key);
+    }
+  }
+  
+  // Cleanup CSRF token store
+  for (const [key, value] of csrfTokenStore.entries()) {
+    if (now > value.expires) {
+      csrfTokenStore.delete(key);
+    }
+  }
+}
+
+// Start cleanup interval
+if (typeof setInterval !== 'undefined') {
+  setInterval(cleanupExpiredEntries, CLEANUP_INTERVAL);
+}
+
 export interface SecurityConfig {
   rateLimit: {
     max: number;
