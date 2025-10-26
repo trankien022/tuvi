@@ -131,18 +131,25 @@ Done! ✓
 
 ```
 docs/
-├── README.md (this file)
-├── for-human/
-│   ├── README.md              (Status & quick ref)
-│   ├── CHATGPT_SETUP.md       (ChatGPT guide)
-│   ├── TEMPLATE_FEATURE_SUMMARY.md
-│   ├── [FEATURE_NAME].md      (Created when feature done)
-│   └── ...
-└── for-ai/
-    ├── README.md              (AI instructions)
-    ├── FEATURE_CHECKLIST.md   (Feature creation process)
-    ├── [FEATURE_NAME].md      (Detailed AI instructions)
-    └── ...
+├── README.md                      (this file)
+├── for-human/                     (For HUMANS - quick summaries)
+│   ├── README.md
+│   ├── CHATGPT_SETUP.md
+│   ├── CHATGPT_MCP_SETUP.md
+│   ├── PAYMENT_STATUS_FEATURE.md
+│   ├── RESPONSIVE_SUMMARY.md
+│   ├── COMPLETE_SETUP_SUMMARY.md
+│   └── TEMPLATE_FEATURE_SUMMARY.md
+├── for-ai/                        (For AI - detailed guides)
+│   ├── README.md
+│   ├── FEATURE_CHECKLIST.md
+│   ├── MCP_HTTP_GUIDE.md
+│   ├── MCP_SETUP.md
+│   ├── MCP_INDEX.md
+│   └── MCP_VERIFICATION_REPORT.md
+└── archive/                       (Old docs for reference)
+    ├── README.md
+    └── (9 old docs)
 ```
 
 ---
@@ -151,10 +158,8 @@ docs/
 
 **In project root:**
 - `START_HERE.md` - Quick setup for humans
-- `CHATGPT_MCP_QUICK_START.md` - Quick reference
-- `MCP_DEPLOYMENT_STATUS.txt` - Deployment status
-
-**These can be moved to docs/ later if needed**
+- `DOCUMENTATION_STRUCTURE.txt` - Visual reference
+- (Most other MD files moved to docs/)
 
 ---
 
