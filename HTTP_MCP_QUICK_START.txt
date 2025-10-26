@@ -1,0 +1,192 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              🚀 HTTP MCP SERVER - QUICK START GUIDE 🚀                        ║
+║              Trúc Nghị Project - MCP Server with URLs                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+✅ STATUS: HTTP MCP Server READY!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 URLS & ENDPOINTS
+
+  Dashboard:         http://localhost:3000
+  MCP API:           http://localhost:3000/mcp
+  Tools List:        http://localhost:3000/mcp/tools
+  Project Info:      http://localhost:3000/mcp/project-info
+  Health Check:      http://localhost:3000/health
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ QUICK START (3 STEPS)
+
+Step 1: Start HTTP Server
+  cd D:\trucnghi
+  npm run mcp:http
+
+Step 2: Open Dashboard
+  http://localhost:3000
+  (Mở browser, thấy dashboard đầy đủ info)
+
+Step 3: Test API
+  curl http://localhost:3000/mcp/tools
+  (hoặc từ browser)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📡 API EXAMPLES
+
+1. Check Health
+   curl http://localhost:3000/health
+
+2. List All Tools
+   curl http://localhost:3000/mcp/tools
+
+3. Get Project Info
+   curl http://localhost:3000/mcp/project-info
+
+4. Call a Tool (read_file)
+   curl -X POST http://localhost:3000/mcp/tools/call \
+     -H "Content-Type: application/json" \
+     -d '{"name":"read_file","arguments":{"filePath":"src/config/config.ts"}}'
+
+5. Call a Tool (get_project_structure)
+   curl -X POST http://localhost:3000/mcp/tools/call \
+     -H "Content-Type: application/json" \
+     -d '{"name":"get_project_structure","arguments":{}}'
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛠️ 9 AVAILABLE TOOLS
+
+  1. read_file              - Đọc nội dung file
+  2. search_files           - Tìm file theo pattern
+  3. search_code            - Tìm code theo keyword
+  4. list_directory         - Liệt kê thư mục
+  5. list_components        - Liệt kê components
+  6. get_registration_data  - Info form đăng ký
+  7. get_payment_status     - Info thanh toán
+  8. get_project_structure  - Tổng quan dự án
+  9. get_api_endpoints      - Liệt kê API endpoints
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 CONFIGURE CLAUDE DESKTOP
+
+Edit: %APPDATA%\Claude\claude_desktop_config.json
+
+{
+  "mcpServers": {
+    "trucnghi-http": {
+      "url": "http://localhost:3000/mcp",
+      "type": "http"
+    }
+  }
+}
+
+Then:
+1. Restart Claude Desktop
+2. Ask: "Explain the registration flow"
+3. Claude sẽ tự động dùng MCP tools
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ADVANTAGES OF HTTP
+
+  ✅ Has URLs (easy to share)
+  ✅ Works with Claude Desktop
+  ✅ Works with ChatGPT Custom GPT
+  ✅ Works with web applications
+  ✅ CORS enabled (all origins)
+  ✅ Beautiful dashboard included
+  ✅ Health check endpoint
+  ✅ Can use from any programming language
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 NPM COMMANDS
+
+  npm run mcp:http        Start HTTP MCP server (port 3000)
+  npm run mcp:http:dev    Start with custom port (set MCP_PORT env var)
+  npm run mcp:test        Test MCP tools
+  npm run mcp:server      Start original Stdio server
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔧 CHANGE PORT
+
+  MCP_PORT=8000 npm run mcp:http
+  
+  Or edit: mcp-server-http.js
+  const PORT = process.env.MCP_PORT || 3000;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 EXAMPLE QUESTIONS (ChatGPT/Claude)
+
+  Q: "Explain the registration flow"
+  A: Claude tự động gọi get_registration_data(), read_file(), etc.
+
+  Q: "Show all payment code"
+  A: Claude sẽ search_code('payment', 'tsx') và liệt kê
+
+  Q: "What are the API endpoints?"
+  A: Claude sẽ gọi get_api_endpoints()
+
+  Q: "How is pricing calculated?"
+  A: Claude sẽ search_code('price') và giải thích
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🐛 TROUBLESHOOTING
+
+Problem: Port 3000 already in use
+Solution:
+  1. Find process: netstat -ano | findstr :3000
+  2. Kill it: taskkill /PID <PID> /F
+  3. Or use different port: MCP_PORT=3001 npm run mcp:http
+
+Problem: Can't connect to server
+Solution:
+  1. Check health: curl http://localhost:3000/health
+  2. Check firewall (Windows Firewall settings)
+  3. Ensure server is running: npm run mcp:http
+
+Problem: Claude Desktop not detecting
+Solution:
+  1. Verify config file: %APPDATA%\Claude\claude_desktop_config.json
+  2. Check URL is correct: http://localhost:3000/mcp
+  3. Restart Claude Desktop completely
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DOCUMENTATION
+
+  MCP_HTTP_GUIDE.md       - Complete HTTP guide
+  mcp-server-http.js      - Source code
+  mcp-server.js           - Tool implementations
+  package.json            - NPM scripts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 YOU'RE READY!
+
+Bước tiếp theo:
+
+  1. ✅ npm run mcp:http         (start server)
+  2. ✅ http://localhost:3000    (open dashboard)
+  3. ✅ Configure Claude Desktop (optional, for HTTP mode)
+  4. ✅ Start asking questions!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Version: 2.0 (HTTP)
+Created: October 2025
+Status: ✅ READY TO USE
+
+Now you have TWO ways to use MCP:
+  • Stdio: for Claude Desktop (no URL needed)
+  • HTTP: for ChatGPT, web apps, and sharing
+
+Enjoy! 🚀
+
+╚══════════════════════════════════════════════════════════════════════════════╝

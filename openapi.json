@@ -1,0 +1,145 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Trúc Nghị Project MCP API",
+    "description": "MCP Server for Trúc Nghị Landing Page project with 9 tools for code analysis and project exploration",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://gayle-hematogenous-enid.ngrok-free.dev"
+    }
+  ],
+  "paths": {
+    "/mcp/tools/call": {
+      "post": {
+        "summary": "Call an MCP tool",
+        "description": "Call any of the 9 available MCP tools to interact with the Trúc Nghị project",
+        "operationId": "callTool",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "arguments"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "read_file",
+                      "search_files",
+                      "search_code",
+                      "list_directory",
+                      "get_registration_data",
+                      "get_payment_status",
+                      "list_components",
+                      "get_project_structure",
+                      "get_api_endpoints"
+                    ],
+                    "description": "Name of the tool to call"
+                  },
+                  "arguments": {
+                    "type": "object",
+                    "description": "Arguments for the tool"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/mcp/tools": {
+      "get": {
+        "summary": "List all available tools",
+        "description": "Get the list of 9 available MCP tools with descriptions",
+        "operationId": "listTools",
+        "responses": {
+          "200": {
+            "description": "List of tools",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tools": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "description": "Check if the MCP server is running",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Server is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

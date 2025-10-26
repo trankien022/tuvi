@@ -3,321 +3,263 @@ import { Icon } from 'astro-icon/components';
 import { ScrollReveal } from '@common';
 ---
 
-<!-- Preconnect to CDN for faster loading -->
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<!-- Premium fonts for hero section - Vietnamese support -->
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Noto+Serif:wght@700;900&family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
-
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- Dark solid background for better contrast -->
-  <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3e%3cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3e%3cg%20fill=%22%23ffffff%22%20fill-opacity=%220.02%22%3e%3cpath%20d=%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3e%3c/g%3e%3c/g%3e%3c/svg%3e')]"></div>
-  </div>
+  <!-- Simple gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950"></div>
 
-  <!-- UnicornStudio Animation with reduced opacity -->
-  <div id="us-animation-wrapper" class="absolute inset-0 overflow-hidden pointer-events-none opacity-0 transition-opacity duration-1000" style="mix-blend-mode: screen; opacity: 0.3 !important;">
-    <div data-us-project="0EKzPMvVLLdF0UgtXigd" style="width: 100%; height: 100%; min-height: 100vh;"></div>
-  </div>
-
-  <!-- Floating elements - very subtle -->
+  <!-- Minimal cosmic floating elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl animate-blob"></div>
-    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-violet-500/15 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-    <div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-purple-500/15 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob animate-pulse-slow"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+  </div>
+  
+  <!-- Floating stars - only on desktop -->
+  <div class="hidden lg:block absolute inset-0 overflow-hidden pointer-events-none opacity-25">
+    <div class="absolute top-[15%] left-[15%] w-2 h-2 bg-purple-300 rounded-full animate-twinkle animate-float"></div>
+    <div class="absolute top-[25%] right-[20%] w-1.5 h-1.5 bg-indigo-300 rounded-full animate-twinkle animation-delay-2000 animate-float animation-delay-600"></div>
+    <div class="absolute top-[70%] left-[25%] w-2 h-2 bg-violet-200 rounded-full animate-twinkle animation-delay-1000 animate-float animation-delay-300"></div>
+    <div class="absolute top-[40%] left-[60%] w-1.5 h-1.5 bg-pink-300 rounded-full animate-twinkle animation-delay-1000"></div>
+    <div class="absolute top-[60%] right-[30%] w-2 h-2 bg-purple-200 rounded-full animate-twinkle animation-delay-4000 animate-float"></div>
+    <div class="absolute bottom-[30%] left-[20%] w-1.5 h-1.5 bg-indigo-200 rounded-full animate-twinkle animation-delay-2000"></div>
   </div>
 
   <!-- Content -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-32">
     <div class="text-center">
+      
       <!-- Badge -->
       <ScrollReveal animation="fade-down">
-        <div class="hero-badge inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-orange-500/20 backdrop-blur-md rounded-full text-white border border-amber-400/30 mb-10 sm:mb-12 hover:border-amber-400/50 transition-all duration-500 shadow-lg shadow-amber-500/20">
-          <Icon name="tabler:sparkles" class="w-5 sm:w-6 h-5 sm:h-6 text-amber-300 animate-pulse" />
-          <span class="text-lg sm:text-xl font-bold tracking-wide bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 bg-clip-text text-transparent">Luận Giải Tử Vi Chuyên Nghiệp</span>
+        <div class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-purple-500/15 backdrop-blur-sm rounded-full text-white border border-purple-400/30 mb-8 sm:mb-10 animate-badge-glow">
+          <Icon name="tabler:zodiac-gemini" class="w-5 h-5 text-purple-300 animate-spin-slow" />
+          <span class="text-base sm:text-lg font-semibold bg-gradient-to-r from-purple-200 to-indigo-200 bg-clip-text text-transparent animate-gradient">✨ Khám Phá Vận Mệnh</span>
         </div>
       </ScrollReveal>
 
-      <!-- Main heading with elegant styling and improved contrast -->
+      <!-- Main Title -->
       <ScrollReveal animation="fade-up" delay={100}>
-        <div class="mb-8 sm:mb-10">
-          <!-- Main Title with premium typography -->
-          <div class="relative mb-6 sm:mb-8">
-            <!-- Decorative background -->
-            <div class="absolute inset-0 flex items-center justify-center -z-10">
-              <div class="w-[90%] h-32 sm:h-40 md:h-48 bg-gradient-to-r from-transparent via-amber-500/10 to-transparent blur-3xl"></div>
-            </div>
-            
-            <!-- Title with layered shadow effect -->
-            <h1 class="hero-title relative">
-              <!-- Shadow layer -->
-              <span class="absolute inset-0 flex items-center justify-center text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-none text-amber-500/20 blur-sm" aria-hidden="true">
-                Tử Vi Trúc Nghi
-              </span>
-              <!-- Main text -->
-              <span class="relative block text-center text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-none hero-main-text">
-                <span class="inline-block bg-gradient-to-br from-white via-amber-50 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
-                  Tử Vi Trúc Nghi
-                </span>
-              </span>
-            </h1>
-          </div>
-
-          <!-- Elegant divider -->
-          <div class="flex items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div class="h-[2px] w-16 sm:w-24 bg-gradient-to-r from-transparent via-amber-400 to-amber-500 shadow-lg shadow-amber-400/50 rounded-full"></div>
-            <div class="relative">
-              <div class="absolute inset-0 bg-amber-400/30 blur-xl rounded-full"></div>
-              <Icon name="tabler:yin-yang" class="relative w-10 sm:w-12 h-10 sm:h-12 text-amber-400 animate-spin-slow drop-shadow-[0_0_20px_rgba(251,191,36,0.8)]" />
-            </div>
-            <div class="h-[2px] w-16 sm:w-24 bg-gradient-to-l from-transparent via-amber-400 to-amber-500 shadow-lg shadow-amber-400/50 rounded-full"></div>
-          </div>
-
-          <!-- Subtitle with elegant serif font -->
-          <div class="relative">
-            <!-- Glow effect -->
-            <div class="absolute inset-0 flex items-center justify-center -z-10">
-              <div class="w-[80%] h-20 bg-amber-400/20 blur-2xl"></div>
-            </div>
-            
-            <h2 class="hero-subtitle relative text-center">
-              <!-- Shadow layer for depth -->
-              <span class="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-amber-600/30 blur-[2px]" aria-hidden="true">
-                Biết Vận Hạn, Nắm Cơ Hội
-              </span>
-              <!-- Main subtitle text -->
-              <span class="relative inline-block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span class="bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                  Biết Vận Hạn, Nắm Cơ Hội
-                </span>
-              </span>
-            </h2>
-          </div>
-        </div>
+        <h1 class="mb-8 sm:mb-10">
+          <span class="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight mb-4 bg-gradient-to-br from-purple-200 via-indigo-100 to-violet-200 bg-clip-text text-transparent animate-gradient-shift">
+            Khám Phá Bản Mệnh
+          </span>
+          <span class="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent animate-shimmer">
+            Thấu Hiểu Vận Mệnh
+          </span>
+        </h1>
       </ScrollReveal>
 
-      <!-- Description with elegant card design -->
+      <!-- Divider -->
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <div class="h-[2px] w-16 bg-gradient-to-r from-transparent via-purple-400 to-indigo-500 rounded-full animate-pulse-slow"></div>
+        <Icon name="tabler:moon-stars" class="w-10 h-10 text-purple-300 animate-float" />
+        <div class="h-[2px] w-16 bg-gradient-to-l from-transparent via-indigo-400 to-purple-500 rounded-full animate-pulse-slow"></div>
+      </div>
+
+      <!-- Subtitle -->
+      <ScrollReveal animation="fade-up" delay={150}>
+        <p class="text-xl sm:text-2xl md:text-3xl text-indigo-200 font-medium leading-relaxed mb-12 max-w-3xl mx-auto px-4">
+          Hành Trình Chiêm Tinh Của Bạn<br/>
+          <span class="text-lg sm:text-xl md:text-2xl">Bắt Đầu Từ Đây</span>
+        </p>
+      </ScrollReveal>
+
+      <!-- Description Card -->
       <ScrollReveal animation="fade-up" delay={200}>
         <div class="max-w-4xl mx-auto mb-10 sm:mb-12 px-4">
-          <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl shadow-black/50">
-            <p class="hero-description text-lg sm:text-xl md:text-2xl text-white leading-relaxed font-medium mb-4">
-              Luận giải <span class="text-amber-400 font-bold drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]">Tử Vi</span> / <span class="text-amber-400 font-bold drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]">Bát Tự</span> chi tiết, chính xác
+          <div class="bg-purple-900/20 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-purple-400/20 animate-border-glow">
+            
+            <p class="text-base sm:text-lg text-white leading-relaxed font-medium mb-6">
+              Giải mã vũ trụ trong bạn • Khám phá <span class="text-purple-300 font-bold animate-text-glow">Chòm Sao</span> của riêng mình
             </p>
-            <div class="h-px w-24 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto my-4 shadow-lg shadow-amber-400/50"></div>
-            <!-- Unified color scheme for icons - using gold/amber tones -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-sm sm:text-base">
-              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border border-amber-400/40 hover:border-amber-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105">
-                <Icon name="tabler:coin" class="w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.8)]" />
-                <span class="text-amber-100 font-semibold">Tài Lộc</span>
+            
+            <div class="h-px w-24 bg-gradient-to-r from-transparent via-purple-400 to-transparent mx-auto my-5 animate-width-pulse"></div>
+            
+            <!-- Mystical Icons -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm sm:text-base">
+              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-purple-500/15 border border-purple-400/30 hover:border-purple-300/50 transition-all duration-200 hover:scale-105 group animate-card-float animation-delay-300">
+                <Icon name="tabler:planet" class="w-6 h-6 text-purple-300 group-hover:rotate-12 transition-transform animate-icon-glow" />
+                <span class="text-purple-100 font-medium">Vận Hành Tinh</span>
               </div>
-              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border border-amber-400/40 hover:border-amber-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105">
-                <Icon name="tabler:briefcase" class="w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.8)]" />
-                <span class="text-amber-100 font-semibold">Quan Lộc</span>
+              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-indigo-500/15 border border-indigo-400/30 hover:border-indigo-300/50 transition-all duration-200 hover:scale-105 group animate-card-float animation-delay-600">
+                <Icon name="tabler:zodiac-cancer" class="w-6 h-6 text-indigo-300 group-hover:rotate-12 transition-transform animate-icon-glow animation-delay-300" />
+                <span class="text-indigo-100 font-medium">Cung Hoàng Đạo</span>
               </div>
-              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border border-amber-400/40 hover:border-amber-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105">
-                <Icon name="tabler:heart" class="w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.8)]" />
-                <span class="text-amber-100 font-semibold">Tình Cảm</span>
+              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-violet-500/15 border border-violet-400/30 hover:border-violet-300/50 transition-all duration-200 hover:scale-105 group animate-card-float animation-delay-900">
+                <Icon name="tabler:moon" class="w-6 h-6 text-violet-300 group-hover:rotate-12 transition-transform animate-icon-glow animation-delay-600" />
+                <span class="text-violet-100 font-medium">Chu Kỳ Mặt Trăng</span>
               </div>
-              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border border-amber-400/40 hover:border-amber-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105">
-                <Icon name="tabler:heart-rate-monitor" class="w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.8)]" />
-                <span class="text-amber-100 font-semibold">Sức Khỏe</span>
+              <div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-pink-500/15 border border-pink-400/30 hover:border-pink-300/50 transition-all duration-200 hover:scale-105 group animate-card-float animation-delay-1200">
+                <Icon name="tabler:stars" class="w-6 h-6 text-pink-300 group-hover:rotate-12 transition-transform animate-icon-glow animation-delay-900" />
+                <span class="text-pink-100 font-medium">Số Mệnh</span>
               </div>
             </div>
           </div>
         </div>
       </ScrollReveal>
 
-      <!-- CTA Buttons - Clear hierarchy with prominent primary action -->
-      <ScrollReveal animation="scale-up" delay={300}>
-        <div class="flex flex-col items-center justify-center gap-4 sm:gap-6 mb-10 sm:mb-14 px-4">
-          <!-- Primary CTA - Highly visible and prominent -->
+      <!-- Primary CTA -->
+      <ScrollReveal animation="scale-up" delay={250}>
+        <div class="flex flex-col items-center gap-4 mb-12 px-4">
           <a
             href="#pricing"
-            class="hero-cta-primary w-full sm:w-auto group inline-flex items-center justify-center px-12 sm:px-16 py-5 sm:py-6 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-gray-900 font-black text-2xl sm:text-3xl rounded-2xl hover:from-amber-300 hover:via-yellow-300 hover:to-amber-400 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-500/50 hover:shadow-amber-400/70 border-2 border-amber-300"
+            class="w-full sm:w-auto group inline-flex items-center justify-center px-10 sm:px-14 py-4 sm:py-5 bg-gradient-to-r from-purple-500 via-indigo-500 to-violet-500 text-white font-bold text-xl sm:text-2xl rounded-xl hover:from-purple-400 hover:via-indigo-400 hover:to-violet-400 transition-all duration-200 hover:scale-105 shadow-lg shadow-purple-500/40 border-2 border-purple-300/40 animate-cta-pulse animate-gradient-shift"
           >
-            <Icon name="tabler:stars" class="w-6 sm:w-7 h-6 sm:h-7 mr-3 group-hover:rotate-12 transition-transform" />
-            Bắt Đầu Luận Giải
-            <Icon name="tabler:arrow-right" class="w-6 sm:w-7 h-6 sm:h-7 ml-3 group-hover:translate-x-1 transition-transform" />
+            <Icon name="tabler:stars" class="w-6 sm:w-7 h-6 sm:h-7 mr-2 group-hover:rotate-12 transition-transform animate-spin-slow" />
+            Khám Phá Vận Mệnh Ngay
+            <Icon name="tabler:sparkles" class="w-6 sm:w-7 h-6 sm:h-7 ml-2 group-hover:scale-110 transition-transform animate-twinkle" />
           </a>
-          <!-- Secondary CTAs - Less prominent -->
-          <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-            <a
-              href="#pricing"
-              class="hero-cta-secondary inline-flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold text-base sm:text-lg rounded-xl border border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
-            >
-              <Icon name="tabler:package" class="w-5 h-5 mr-2" />
-              Xem Gói Dịch Vụ
-            </a>
-            <a
-              href="#about"
-              class="hero-cta-secondary inline-flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold text-base sm:text-lg rounded-xl border border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
-            >
-              <Icon name="tabler:info-circle" class="w-5 h-5 mr-2" />
-              Tìm Hiểu Thêm
-            </a>
+          
+          <p class="text-purple-200 text-sm italic opacity-75 animate-fade-in">
+            ✨ Hơn 10,000 người đã tìm thấy câu trả lời
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <!-- Simplified Stats -->
+      <ScrollReveal animation="fade-up" delay={300}>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto px-4">
+          <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 animate-stat-card hover:scale-105 animate-card-float animation-delay-300">
+            <div class="text-3xl sm:text-4xl font-black text-yellow-300 mb-1 animate-number-pulse">10K+</div>
+            <div class="text-sm text-indigo-200">Khách hàng</div>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 animate-stat-card hover:scale-105 animate-card-float animation-delay-600">
+            <div class="text-3xl sm:text-4xl font-black text-green-300 mb-1 animate-number-pulse animation-delay-300">4.9/5</div>
+            <div class="text-sm text-indigo-200">Đánh giá</div>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 animate-stat-card hover:scale-105 animate-card-float animation-delay-900">
+            <div class="text-3xl sm:text-4xl font-black text-blue-300 mb-1 animate-number-pulse animation-delay-600">95%</div>
+            <div class="text-sm text-indigo-200">Chính xác</div>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 animate-stat-card hover:scale-105 animate-card-float animation-delay-1200">
+            <div class="text-3xl sm:text-4xl font-black text-pink-300 mb-1 animate-number-pulse animation-delay-900">24h</div>
+            <div class="text-sm text-indigo-200">Giao nhanh</div>
           </div>
         </div>
       </ScrollReveal>
 
-      <!-- Features/Stats -->
-      <ScrollReveal animation="fade-up" delay={400}>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto px-4">
-          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-yellow-300 mb-2 tabular-nums">10,000+</div>
-            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Khách hàng</div>
-          </div>
-          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-green-300 mb-2 tabular-nums">4.9/5</div>
-            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Đánh giá</div>
-          </div>
-          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-blue-300 mb-2 tabular-nums">95%</div>
-            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Độ chính xác</div>
-          </div>
-          <div class="hero-stat-card bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-            <div class="hero-stat-number text-4xl sm:text-5xl font-black text-pink-300 mb-2 tabular-nums">24h</div>
-            <div class="hero-stat-label text-base sm:text-lg text-indigo-200 font-semibold">Giao nhanh</div>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <!-- Scroll indicator -->
-      <ScrollReveal animation="fade-in" delay={600}>
-        <div class="mt-16">
-          <a href="#about" class="inline-block animate-bounce">
-            <Icon name="tabler:chevron-down" class="w-8 h-8 text-white/50 hover:text-white transition-colors" />
-          </a>
-        </div>
-      </ScrollReveal>
     </div>
   </div>
-
-  <!-- Scroll fade effect -->
-  <div id="hero-overlay" class="absolute inset-0 bg-black pointer-events-none transition-opacity duration-300" style="opacity: 0;"></div>
 </section>
 
 <style>
+  /* ============================================
+     BACKGROUND ANIMATIONS
+     ============================================ */
+  
+  /* Blob animation */
   @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
     }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
+    50% {
+      transform: translate(20px, -30px) scale(1.05);
     }
   }
 
   .animate-blob {
-    animation: blob 7s infinite;
+    animation: blob 12s ease-in-out infinite;
   }
 
-  .animation-delay-2000 {
-    animation-delay: 2s;
+  /* Stars animation */
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
   }
 
-  .animation-delay-4000 {
-    animation-delay: 4s;
+  .animate-twinkle {
+    animation: twinkle 4s ease-in-out infinite;
   }
 
-  /* Smooth scroll fade */
-  #hero {
-    transition: opacity 0.3s ease-out;
+  /* ============================================
+     TEXT ANIMATIONS
+     ============================================ */
+
+  /* Gradient animation for text */
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
-  /* Hero Typography Styles */
-  .hero-badge {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .hero-title {
-    /* Vietnamese-friendly serif font with excellent readability */
-    font-family: 'Noto Serif', 'Merriweather', Georgia, serif;
-    font-weight: 900;
-    letter-spacing: 0.01em;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .hero-main-text {
-    /* Enhanced text styling with depth - optimized for Vietnamese */
-    font-family: 'Noto Serif', 'Merriweather', Georgia, serif;
-    font-weight: 900;
-    letter-spacing: 0.02em;
-    position: relative;
-  }
-  
-  .hero-subtitle {
-    /* Clean sans-serif for better Vietnamese diacritics display */
-    font-family: 'Montserrat', 'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .hero-description {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .hero-cta-primary {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    text-rendering: optimizeLegibility;
-  }
-  
-  .hero-cta-secondary {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-rendering: optimizeLegibility;
-  }
-  
-  .hero-stat-card {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .hero-stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hero-stat-number {
-    font-family: 'Space Grotesk', 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    text-rendering: optimizeLegibility;
-  }
-  
-  .hero-stat-label {
-    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-rendering: optimizeLegibility;
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 5s ease infinite;
   }
 
-  /* Slow spin animation for yin-yang */
+  /* Gradient shift animation */
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+      filter: brightness(1);
+    }
+    50% {
+      background-position: 100% 50%;
+      filter: brightness(1.2);
+    }
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease-in-out infinite;
+  }
+
+  /* Shimmer effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .animate-shimmer {
+    background-size: 200% auto;
+    animation: shimmer 5s linear infinite;
+  }
+
+  /* Text glow */
+  @keyframes text-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(168, 85, 247, 0.9), 0 0 30px rgba(168, 85, 247, 0.6);
+    }
+  }
+
+  .animate-text-glow {
+    animation: text-glow 3s ease-in-out infinite;
+  }
+
+  /* ============================================
+     ICON & ELEMENT ANIMATIONS
+     ============================================ */
+
+  /* Float animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Slow spin */
   @keyframes spin-slow {
     from {
       transform: rotate(0deg);
@@ -331,195 +273,224 @@ import { ScrollReveal } from '@common';
     animation: spin-slow 20s linear infinite;
   }
 
-  /* Optimize Vietnamese text rendering */
-  #hero h1, #hero p, #hero span {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "kern" 1;
+  /* Icon glow */
+  @keyframes icon-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.4));
+    }
+    50% {
+      filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+    }
   }
 
-  /* GPU acceleration for animations */
-  #hero .animate-blob {
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
+  .animate-icon-glow {
+    animation: icon-glow 3s ease-in-out infinite;
   }
 
-  /* Ensure proper Vietnamese character display */
-  #hero h1 {
-    font-synthesis: none;
-    font-kerning: normal;
+  /* ============================================
+     CARD & CONTAINER ANIMATIONS
+     ============================================ */
+
+  /* Card float */
+  @keyframes card-float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
   }
 
-  /* Hide UnicornStudio watermark - Multiple selectors for comprehensive coverage */
-  a[href*="unicorn.studio"],
-  a[href*="unicornstudio"],
-  a[target="_blank"][rel*="noopener"],
-  #us-animation-wrapper a,
-  div[data-us-project] a,
-  div[data-us-project] > a,
-  div[data-us-project] + a,
-  .unicornstudio-watermark,
-  [class*="watermark"],
-  [id*="watermark"] {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    position: absolute !important;
-    left: -9999px !important;
+  .animate-card-float {
+    animation: card-float 4s ease-in-out infinite;
+  }
+
+  /* Border glow */
+  @keyframes border-glow {
+    0%, 100% {
+      border-color: rgba(192, 132, 252, 0.2);
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+    }
+    50% {
+      border-color: rgba(192, 132, 252, 0.4);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 30px rgba(168, 85, 247, 0.2);
+    }
+  }
+
+  .animate-border-glow {
+    animation: border-glow 4s ease-in-out infinite;
+  }
+
+  /* Badge glow */
+  @keyframes badge-glow {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 30px rgba(168, 85, 247, 0.3);
+    }
+  }
+
+  .animate-badge-glow {
+    animation: badge-glow 3s ease-in-out infinite;
+  }
+
+  /* ============================================
+     CTA & BUTTON ANIMATIONS
+     ============================================ */
+
+  /* CTA pulse */
+  @keyframes cta-pulse {
+    0%, 100% {
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 15px 35px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.4);
+      transform: scale(1.02);
+    }
+  }
+
+  .animate-cta-pulse {
+    animation: cta-pulse 3s ease-in-out infinite;
+  }
+
+  /* ============================================
+     MISC ANIMATIONS
+     ============================================ */
+
+  /* Slow pulse */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  /* Width pulse */
+  @keyframes width-pulse {
+    0%, 100% {
+      transform: scaleX(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scaleX(1.2);
+      opacity: 1;
+    }
+  }
+
+  .animate-width-pulse {
+    animation: width-pulse 3s ease-in-out infinite;
+  }
+
+  /* Fade in */
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.75;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 2s ease-in forwards;
+  }
+
+  /* Stats card animation */
+  @keyframes stat-card {
+    0%, 100% {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    50% {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .animate-stat-card {
+    animation: stat-card 5s ease-in-out infinite;
+  }
+
+  /* Number pulse */
+  @keyframes number-pulse {
+    0%, 100% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    50% {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+  }
+
+  .animate-number-pulse {
+    animation: number-pulse 3s ease-in-out infinite;
+  }
+
+  /* ============================================
+     ANIMATION DELAYS
+     ============================================ */
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .animation-delay-900 {
+    animation-delay: 0.9s;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .animation-delay-1200 {
+    animation-delay: 1.2s;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* ============================================
+     PERFORMANCE OPTIMIZATIONS
+     ============================================ */
+
+  .animate-blob,
+  .animate-twinkle,
+  .animate-gradient,
+  .animate-gradient-shift,
+  .animate-shimmer,
+  .animate-float,
+  .animate-spin-slow,
+  .animate-card-float,
+  .animate-cta-pulse {
+    will-change: transform, opacity;
+  }
+
+  /* ============================================
+     ACCESSIBILITY
+     ============================================ */
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>
-
-<!-- Scroll effect script with throttle -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const hero = document.getElementById('hero');
-    const heroOverlay = document.getElementById('hero-overlay');
-    let ticking = false;
-
-    const updateOverlay = () => {
-      const scrollTop = window.pageYOffset;
-      const windowHeight = window.innerHeight;
-      const overlayOpacity = Math.min(0.5, scrollTop / windowHeight);
-
-      if (heroOverlay) {
-        heroOverlay.style.opacity = overlayOpacity.toString();
-      }
-      ticking = false;
-    };
-
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        window.requestAnimationFrame(updateOverlay);
-        ticking = true;
-      }
-    }, { passive: true });
-  });
-</script>
-
-<!-- Watermark Remover Script - Must run before UnicornStudio -->
-<script type="text/javascript" is:inline>
-  (function() {
-    // Function to aggressively remove watermark
-    function removeWatermark() {
-      // Find and remove all links containing unicorn.studio
-      var links = document.querySelectorAll('a[href*="unicorn.studio"], a[href*="unicornstudio"]');
-      links.forEach(function(link) {
-        link.remove();
-      });
-      
-      // Find and hide any remaining watermark elements
-      var watermarks = document.querySelectorAll('[class*="watermark"], [id*="watermark"]');
-      watermarks.forEach(function(el) {
-        el.style.display = 'none';
-        el.remove();
-      });
-      
-      // Check inside the animation wrapper
-      var wrapper = document.getElementById('us-animation-wrapper');
-      if (wrapper) {
-        var allLinks = wrapper.querySelectorAll('a');
-        allLinks.forEach(function(link) {
-          link.remove();
-        });
-      }
-      
-      // Check inside data-us-project div
-      var projectDiv = document.querySelector('[data-us-project]');
-      if (projectDiv) {
-        var projectLinks = projectDiv.querySelectorAll('a');
-        projectLinks.forEach(function(link) {
-          link.remove();
-        });
-      }
-    }
-    
-    // Run immediately
-    removeWatermark();
-    
-    // Run after DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', removeWatermark);
-    }
-    
-    // Set up MutationObserver to watch for dynamically added watermarks
-    var observer = new MutationObserver(function(mutations) {
-      removeWatermark();
-    });
-    
-    // Start observing when DOM is ready
-    function startObserving() {
-      var targetNode = document.getElementById('us-animation-wrapper') || document.body;
-      observer.observe(targetNode, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['style', 'class', 'id']
-      });
-    }
-    
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', startObserving);
-    } else {
-      startObserving();
-    }
-    
-    // Also run periodically for the first few seconds
-    var intervalCount = 0;
-    var checkInterval = setInterval(function() {
-      removeWatermark();
-      intervalCount++;
-      if (intervalCount > 20) { // Stop after 10 seconds (20 * 500ms)
-        clearInterval(checkInterval);
-      }
-    }, 500);
-  })();
-</script>
-
-<!-- UnicornStudio Script - Optimized Loading -->
-<script type="text/javascript" is:inline>
-  // Defer UnicornStudio loading until page is fully loaded
-  (function() {
-    function loadUnicornStudio() {
-      if (!window.UnicornStudio) {
-        window.UnicornStudio = { isInitialized: false };
-        var script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js';
-        script.async = true;
-        script.defer = true;
-        script.onload = function() {
-          if (!window.UnicornStudio.isInitialized) {
-            UnicornStudio.init();
-            window.UnicornStudio.isInitialized = true;
-            
-            // Fade in animation after initialization
-            setTimeout(function() {
-              var wrapper = document.getElementById('us-animation-wrapper');
-              if (wrapper) {
-                wrapper.style.opacity = '1';
-              }
-            }, 300);
-          }
-        };
-        (document.head || document.body).appendChild(script);
-      }
-    }
-    
-    // Use requestIdleCallback for non-critical loading, fallback to setTimeout
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadUnicornStudio, { timeout: 2000 });
-    } else {
-      // Load after page fully loaded
-      if (document.readyState === 'complete') {
-        setTimeout(loadUnicornStudio, 100);
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(loadUnicornStudio, 100);
-        });
-      }
-    }
-  })();
-</script>

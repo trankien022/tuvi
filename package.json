@@ -24,7 +24,13 @@
     "test:e2e": "playwright test",
     "test:sheets": "node scripts/test-google-sheets.js",
     "coverage": "vitest run --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "mcp:test": "node scripts/test-mcp-server.js",
+    "mcp:server": "node mcp-server.js",
+    "mcp:help": "cat README_MCP.md",
+    "mcp:http": "node mcp-server-http.js",
+    "mcp:http:dev": "MCP_PORT=3000 node mcp-server-http.js",
+    "mcp:tunnel": "ngrok http 3000"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,astro}": [
